@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_back"
+          android:icon="@drawable/ic_menu_back"
+          android:title="@string/menu_label_back" />
+    <item android:id="@+id/menu_forward"
+          android:icon="@drawable/ic_menu_forward"
+          android:title="@string/menu_label_forward" />
+    <item android:id="@+id/menu_today"
+          android:icon="@drawable/ic_menu_today"
+          android:title="@string/menu_label_today" />
+
+    <item android:id="@+id/menu_refresh"
+          android:icon="@drawable/ic_menu_refresh"
+          android:title="@string/menu_label_refresh" />
+    <item android:id="@+id/menu_info"
+          android:icon="@android:drawable/ic_menu_info_details"
+          android:title="@string/menu_label_info" />
+    
+</menu>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:isScrollContainer="true"
+	android:layout_height="wrap_content" android:scrollbars="vertical"
+	android:orientation="vertical" android:layout_gravity="top"
+	android:scrollbarAlwaysDrawVerticalTrack="true">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<TextView android:text="@string/weekly_envelope"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textStyle="bold" />
+
+		<TextView android:id="@+id/envelope_size" android:gravity="right"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="2" />
+
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:id="@+id/execution_layout_envelope_spent_remaining"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:visibility="gone">
+
+		<TextView android:text="@string/envelope_spent"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="1" />
+
+		<TextView android:id="@+id/envelope_spent" android:gravity="center_horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="2" />
+
+		<TextView android:text="@string/envelope_remaining_left"
+			android:id="@+id/envelope_remaining_message" android:gravity="right"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="1" />
+
+		<TextView android:gravity="right" android:id="@+id/envelope_remaining"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="2" />
+
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="10dp">
+
+		<TextView android:text="@string/daily_execution"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textStyle="bold" />
+
+		<TextView android:id="@+id/today_spent" android:gravity="right"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="2" />
+
+	</LinearLayout>
+
+	<ProgressBar android:id="@+id/execution_envelope_progress"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentRight="true" android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp" />
+
+	<LinearLayout android:orientation="vertical"
+		android:id="@+id/execution_layout_account_execution"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:visibility="gone">
+
+		<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/envelope_persons" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:columnWidth="50dp"
+			android:numColumns="auto_fit" android:verticalSpacing="10dp"
+			android:horizontalSpacing="10dp" android:stretchMode="columnWidth"
+			android:layout_marginTop="10dp" android:layout_marginBottom="10dp" />
+
+		<ListView android:id="@+id/date_execution"
+			android:layout_height="wrap_content" android:layout_width="match_parent" />
+
+		<TextView android:id="@+id/date_execution_empty"
+			android:visibility="gone" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/date_execution_empty" />
+
+	</LinearLayout>
+
+</LinearLayout>

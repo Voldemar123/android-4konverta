@@ -1,0 +1,94 @@
+<envelope begin="2011-05-30" size="563.0">
+	<person id="19824747" name="Папа">
+		<dailyExpense date="2011-05-30" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-05-31" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-01" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-02" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-03" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-04" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-05" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+	</person>
+	<person id="19824748" name="Мама">
+		<dailyExpense date="2011-05-30" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-05-31" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-01" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-02" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-03" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-04" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-05" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+	</person>
+	<person id="19824749" name="Дочь">
+		<dailyExpense date="2011-05-30" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-05-31" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-01" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-02" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-03" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-04" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-05" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+	</person>
+	<person id="19890745" name="Кошка">
+		<dailyExpense date="2011-05-30" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-05-31" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-01" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-02" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-03" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-04" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+		<dailyExpense date="2011-06-05" defaultAccount="4915287">
+			<sum>0.0</sum>
+		</dailyExpense>
+	</person>
+</envelope>

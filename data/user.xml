@@ -1,0 +1,20 @@
+<user>
+  <country code="gb">Великобритания</country>
+  <currency id="gb" code="GBP">фунт</currency>
+  <firstDayOfWeek>1</firstDayOfWeek>
+  <timeZone>Europe/London</timeZone>
+  <disableExtendedSyntax>true</disableExtendedSyntax>
+
+  <persons>
+    <person id="23443234" name="Петя"/>
+    <person id="2345689" name="Вася"/>
+  </persons>
+
+  <accounts>
+    <account id="441232" name="Наличка">
+      <currency id="gb" code="GBP">фунт</currency>
+      <value>250 фунтов</value>
+    </account>
+
+  </accounts>
+</user>

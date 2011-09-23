@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">4konverta</string>
+
+    <string name="country">Страна</string>
+    <string name="currency">Валюта</string>
+    <string name="timeZone">Временная зона</string>
+    <string name="persons">Люди</string>
+    <string name="accounts">Счета</string>
+    
+    
+    <string name="daily_execution">Ежедневные траты</string>
+    <string name="date_execution_empty">Нет запланированных действий</string>
+    <string name="total_left">Осталось потратить</string>
+    
+    
+    <string name="execution_actual_income">Получить</string>
+    <string name="execution_actual_expense">Потратить</string>
+    <string name="execution_actual_goal_credit">Отложить</string>
+    
+    <string name="weekly_envelope">Недельный конверт</string>
+    <string name="execution_per_day">на день</string>
+    <string name="envelope_size">размер</string>
+	<string name="envelope_spent">потрачено</string>
+	<string name="envelope_remaining_left">осталось</string>
+	<string name="envelope_remaining_overdraft">перерасход</string>
+    
+    <string name="planned_date_from">от</string>
+    
+    
+    <string name="execution_popup_editor_ok_button">Сохранить</string>
+    <string name="execution_popup_editor_cancel_button">Отмена</string>
+    <string name="account_label">Со счета</string>
+    <string name="expression_label">Сумма</string>
+    
+    <string name="progress_msg_load">Загрузка данных</string>
+    <string name="progress_msg_save">Сохранение данных</string>
+    <string name="progress_status_msg">Получение статуса аккаунта</string>
+    <string name="progress_envelope_msg">Загрузка ежедневных трат</string>
+    
+    
+    <string name="menu_label_refresh">Обновить</string>
+    <string name="menu_label_info">Статус</string>
+    <string name="menu_label_login">Аккаунт</string>
+    <string name="menu_label_back">Вчера</string>
+    <string name="menu_label_forward">Завтра</string>
+    <string name="menu_label_today">Сегодня</string>
+    
+    
+</resources>

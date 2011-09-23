@@ -1,0 +1,27 @@
+<user>
+	<country code="ua">Украина</country>
+	<currency code="UAH" id="ua">грн</currency>
+	<firstDayOfWeek>2</firstDayOfWeek>
+	<timeZone>Europe/Kiev</timeZone>
+	<disableExtendedSyntax>true</disableExtendedSyntax>
+	<persons>
+		<person id="19824747" name="Папа" />
+		<person id="19824748" name="Мама" />
+		<person id="19824749" name="Дочь" />
+		<person id="19890745" name="Кошка" />
+	</persons>
+	<accounts>
+		<account id="4915286" name="В копилке (баксы)">
+			<currency code="USD" id="us">дол</currency>
+			<value>56 дол</value>
+		</account>
+		<account id="4915287" name="Деньги на руках">
+			<currency code="UAH" id="ua">грн</currency>
+			<value>20 грн</value>
+		</account>
+		<account id="4981195" name="Заначка">
+			<currency code="UAH" id="ua">грн</currency>
+			<value>198 грн</value>
+		</account>
+	</accounts>
+</user>

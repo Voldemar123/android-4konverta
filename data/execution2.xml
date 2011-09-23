@@ -1,0 +1,131 @@
+<execution begin="2011-09-12" remaining="2685.9049999999997">
+	<actualIncome actualDate="2011-09-16" plannedDate="2011-09-16"
+		defaultAccount="4915287">
+		<income id="20284812" name="(Аванс) за сайт">
+			<currency code="UAH" id="ua">грн</currency>
+		</income>
+		<planned>250.0</planned>
+		<actual>250.0</actual>
+		<actualExpression account="4915287" currency="ua">250
+		</actualExpression>
+	</actualIncome>
+	<actualExpense actualDate="2011-09-12" plannedDate="2011-09-12"
+		defaultAccount="4915287">
+		<expense id="16449975" name="Закупка продовольствия">
+			<currency code="UAH" id="ua">грн</currency>
+		</expense>
+		<planned>500.0</planned>
+		<actual></actual>
+	</actualExpense>
+	<actualExpense actualDate="2011-09-16" plannedDate="2011-09-16"
+		defaultAccount="4915287">
+		<expense id="16747879" name="(Закупка продовольствия) в гастрономе">
+			<currency code="UAH" id="ua">грн</currency>
+		</expense>
+		<planned>100.0</planned>
+		<actual>100.0</actual>
+		<actualExpression account="4915287" currency="ua">100
+		</actualExpression>
+	</actualExpense>
+	<envelope begin="2011-09-12" size="479.0">
+		<person id="19824747" name="Папа">
+			<dailyExpense date="2011-09-12" defaultAccount="4915286">
+				<expression account="4915287" currency="ua">10</expression>
+				<expression account="4981195" currency="ua">11</expression>
+				<expression account="4915286" currency="us">5</expression>
+				<sum>61.05</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-13" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-14" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-15" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-16" defaultAccount="4915286">
+				<expression account="4981195" currency="ua">10</expression>
+				<sum>10.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-17" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-18" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+		</person>
+		<person id="19824748" name="Мама">
+			<dailyExpense date="2011-09-12" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-13" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-14" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-15" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-16" defaultAccount="4915286">
+				<expression account="4915287" currency="ua">11</expression>
+				<sum>11.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-17" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-18" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+		</person>
+		<person id="19824749" name="Дочь">
+			<dailyExpense date="2011-09-12" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-13" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-14" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-15" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-16" defaultAccount="4915286">
+				<expression account="4915286" currency="us">12</expression>
+				<sum>96.21000000000001</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-17" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-18" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+		</person>
+		<person id="19890745" name="Кошка">
+			<dailyExpense date="2011-09-12" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-13" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-14" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-15" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-16" defaultAccount="4915286">
+				<expression account="4915286" currency="us">13</expression>
+				<sum>104.2275</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-17" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+			<dailyExpense date="2011-09-18" defaultAccount="4915286">
+				<sum>0.0</sum>
+			</dailyExpense>
+		</person>
+	</envelope>
+</execution>

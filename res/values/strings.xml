@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">4konverta</string>
+
+    <string name="country">Country</string>
+    <string name="currency">Currency</string>
+    <string name="timeZone">Time zone</string>
+    <string name="persons">Persons</string>
+    
+    <string name="accounts">Accounts</string>
+	<string name="accounts_no_items">No accounts to display</string>
+
+    <string name="envelope_no_items">No envelope data to display</string>
+
+    <string name="daily_execution">Execution today</string>
+    <string name="date_execution_empty">No execution activity for today</string>
+	<string name="total_left">total left</string>
+
+    <!-- Permission label -->
+    <string
+        name="permlab_samplesyncadapterAuthPassword">access to passwords for Sample SyncAdapter accounts</string>
+    <!-- Permission description -->
+    <string
+        name="permdesc_samplesyncadapterAuthPassword">Allows applications direct access to the passwords for the
+        Sample SyncAdapter account(s) you have configured.</string>
+
+    <!-- Permission label -->
+    <string
+        name="permlab_samplesyncadapterAuth">view configured accounts</string>
+    <!-- Permission description -->
+    <string
+        name="permdesc_samplesyncadapterAuth">Allows applications to see the usernames (email addresses) of
+        the Sample SyncAdapter account(s) you have configured.</string>
+    <string
+        name="notification_login_error">Touch to sign into your Sample SyncAdapter account.</string>
+
+    <!-- Title string for Login activity-->
+    <string
+        name="ui_activity_title">Sign-in</string>
+    <!-- Message shown in progress dialog while app connects to the server -->
+    <string
+        name="ui_activity_authenticating">Authenticating\u2026</string>
+
+    <!-- AuthenticatorActivity -->
+    <skip />
+    <!-- Label above username EditText -->
+    <string
+        name="login_activity_username_label">Username</string>
+    <!-- Label above password EditText -->
+    <string
+        name="login_activity_password_label">Password</string>
+    <!-- Button to sign in after entering username and password -->
+    <string
+        name="login_activity_ok_button">Sign in</string>
+
+    <string name="login_fail_text_both">The username or password isn\'t valid. A application account is
+        required. Please try again. </string>
+    <string name="login_fail_text_password_only">You entered the wrong password or your account has changed.
+        Please re-enter your password.</string>
+
+    <string name="login_fail_text_password_missing">Type the password for this account.</string>
+    <string name="new_account_text">Sign in to your account.</string>
+
+    <string name="execution_planned">planned</string>
+    <string name="execution_actual">actual</string>
+
+    <string name="execution_actual_income">Income</string>
+    <string name="execution_actual_expense">Expense</string>
+    <string name="execution_actual_goal_credit">Goal Credit</string>
+
+	<string name="weekly_envelope">Weekly envelope</string>
+	<string name="execution_per_day">for day</string>
+	<string name="envelope_size">size</string>
+	<string name="envelope_spent">spent</string>
+	<string name="envelope_remaining_left">remaining</string>
+	<string name="envelope_remaining_overdraft">overdraft</string>
+
+    <string name="planned_date_from">from</string>
+
+
+    <string name="execution_popup_editor_ok_button">Ok</string>
+    <string name="execution_popup_editor_cancel_button">Cancel</string>
+    <string name="account_label">From account</string>
+    <string name="expression_label">Sum</string>
+
+	<string name="progress_msg_load">Data loading</string>
+    <string name="progress_msg_save">Saving data</string>
+	<string name="progress_status_msg">Request account status</string>
+    <string name="progress_envelope_msg">Load daily expenses</string>
+	
+	<string name="menu_label_refresh">Refresh</string>
+	<string name="menu_label_status">Info</string>
+	<string name="menu_label_login">Login</string>
+	<string name="menu_label_back">Tomorrow</string>
+    <string name="menu_label_forward">Yesterday</string>
+    <string name="menu_label_today">Today</string>
+	
+
+</resources>

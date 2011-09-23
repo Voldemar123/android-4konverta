@@ -1,0 +1,43 @@
+    <html>  
+    <head>  
+    <script language="JavaScript" type="text/javascript">  
+        function userinfo()  
+        {  
+            xmlhttp = new XMLHttpRequest();    
+//            xmlhttp.open('GET', 'http://www.4konverta.com/data/test_android/execution/2011-09-12', true);    
+            xmlhttp.open('GET', 'http://www.4konverta.com/data/test_android/dailyExpense/19824747/2011-09-22', true);    
+//            xmlhttp.open('GET', 'http://www.4konverta.com/data/test_android', true);    
+            xmlhttp.setRequestHeader('4KApplication', 'Demo');
+            xmlhttp.setRequestHeader('4KVersion', '1.2');
+            xmlhttp.setRequestHeader('4KAuth', 'test_android');    
+           xmlhttp.addEventListener("load", transferComplete, false);    
+           xmlhttp.addEventListener("error", transferFailed, false);    
+           xmlhttp.addEventListener("abort", transferCanceled, false)  
+           xmlhttp.onreadystatechange = function()    
+           {    
+               if (xmlhttp.readyState == 4) {    
+                   document.getElementById('test').innerHTML=xmlhttp.responseText  
+               }    
+           };    
+           xmlhttp.send(null);   
+       }  
+       function transferComplete(evt) {    
+           alert("The transfer is complete.");    
+       }    
+        
+       function transferFailed(evt) {    
+        alert("An error occurred while transferring the file.");    
+       }    
+        
+       function transferCanceled(evt) {    
+           alert("The transfer has been canceled by the user.");    
+       }  
+   </script>  
+   </head>  
+   <body>  
+   <form method="POST">  
+   <input type="button" value="Request" onclick="userinfo();return false;" />  
+   </form>  
+   <p id="test">Answer will be here...</p>  
+  </body>  
+  </html>  

@@ -24,7 +24,7 @@ public class StatusActivity extends BaseActivity {
 	private TextView mCurrency;
 	private GridView mPersons;
 	private ListView mAccounts;
-	private TextView mAccountsEmpty;
+	private View mAccountsEmpty;
 	private TextView mAccountLogin;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class StatusActivity extends BaseActivity {
         mCurrency = (TextView) findViewById(R.id.currency);
         mPersons = (GridView) findViewById(R.id.persons);
         mAccounts = (ListView) findViewById(R.id.accounts);
-        mAccountsEmpty = (TextView) findViewById(R.id.accounts_empty);
+        mAccountsEmpty = (View) findViewById(R.id.accounts_empty);
         mAccountLogin = (TextView) findViewById(R.id.account_login);
 	}
 
@@ -65,6 +65,7 @@ public class StatusActivity extends BaseActivity {
     
 	void fillPageContent() {
 		mAccountLogin.setText( StoreClient.getLogin() );
+		
         mCountry.setText( BudgetWork.userData.getCountry().getValue() );
         mCurrency.setText( BudgetWork.userData.getCurrency().getValue() );
         
@@ -73,13 +74,11 @@ public class StatusActivity extends BaseActivity {
         				this, 
         				BudgetWork.userData.getPersons() ) );  
         
-        if ( BudgetWork.userData.getAccounts() == null)
-        	mAccountsEmpty.setVisibility(View.VISIBLE);
-        else
-        	mAccounts.setAdapter( 
-        			new AccountAdapter( 
-        					this, 
-        					BudgetWork.userData.getAccounts() ) );        
+		mAccounts.setEmptyView(mAccountsEmpty);
+		mAccounts.setAdapter(
+				new AccountAdapter(
+						this, 
+						BudgetWork.userData.getAccounts() ) );
 	} 
 	
 }

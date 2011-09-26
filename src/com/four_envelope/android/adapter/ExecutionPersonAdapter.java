@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.four_envelope.android.R;
 import com.four_envelope.android.budget.BudgetWork;
+import com.four_envelope.android.budget.DailyBudget;
+import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Person;
 
 /**
@@ -22,6 +24,7 @@ import com.four_envelope.android.model.Person;
 public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 	
 	private ArrayList<Person> items;
+	private String mExecutionDate;
 	private final static int viewResourceId = R.layout.envelope_persons_list_item;
 
 	protected class ViewHolder {
@@ -33,9 +36,11 @@ public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 		String mDate;
 	}
 	
-	public ExecutionPersonAdapter(Context context, ArrayList<Person> items) {
-		super(context, viewResourceId, items);
-		this.items = items;
+	public ExecutionPersonAdapter(Context context, DailyBudget budget) {
+		super(context, viewResourceId, budget.execution.getEnvelope().getPersons());
+		
+		this.mExecutionDate = budget.date;
+		this.items = budget.execution.getEnvelope().getPersons();
 	}
 
     @Override
@@ -59,15 +64,18 @@ public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 		final Person o = items.get(position);
 		if (o != null) {
 // one day person sum expense	
-			holder.mSum.setText( BudgetWork.getPersonDailyExpense(o) );
+			final DailyExpense personDailyExpense = BudgetWork.getPersonDailyExpense( o, mExecutionDate );
+			
+			holder.mSum.setText( BudgetWork.getPersonDailyExpenseSum(personDailyExpense) );
 
 			holder.mName.setText( o.getName() );
-			if ( BudgetWork.checkPersonHasntSetDailyExpense(o) )
+			if ( BudgetWork.checkPersonHasntSetDailyExpense(personDailyExpense) )
 				holder.mName.setTextColor(Color.RED);
 			
 			holder.mPersonId = o.getId();
 			holder.mPersonName = o.getName();
-			holder.mDate = BudgetWork.getPersonExpenseDate(o);
+			
+			holder.mDate = mExecutionDate;
 		}
 
 		return convertView;

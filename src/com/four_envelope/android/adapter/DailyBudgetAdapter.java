@@ -10,7 +10,7 @@ import com.four_envelope.android.activity.Invoke;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.Execution;
-import com.four_envelope.android.store.StoreEnvelope;
+import com.four_envelope.android.store.StoreExecution;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,6 +50,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 
 		View mExecutionLayoutEnvelopeSpentRemaining;
 		View mExecutionLayoutAccountExecution;
+		View mDateExecutionEmpty;
 		
 		TextView mEnvelopeSize;
 		TextView mEnvelopeSpent;
@@ -57,7 +58,6 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 		TextView mEnvelopeRemainingMessage;
 		TextView mTodaySpent;
 
-		TextView mDateExecutionEmpty;
 		ListView mDateExecution;
 		
 		GridView mPersons;
@@ -100,6 +100,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 			
 			holder.mExecutionLayoutEnvelopeSpentRemaining = (View) view.findViewById(R.id.execution_layout_envelope_spent_remaining);
 			holder.mExecutionLayoutAccountExecution = (View) view.findViewById(R.id.execution_layout_account_execution);
+			holder.mDateExecutionEmpty = (View) view.findViewById(R.id.date_execution_empty);
 
 			holder.mEnvelopeSize = (TextView) view.findViewById(R.id.envelope_size);
 			holder.mEnvelopeSpent = (TextView) view.findViewById(R.id.envelope_spent);
@@ -108,7 +109,6 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 			holder.mTodaySpent = (TextView) view.findViewById(R.id.today_spent);
 			
 			holder.mDateExecution = (ListView) view.findViewById(R.id.date_execution);
-			holder.mDateExecutionEmpty = (TextView) view.findViewById(R.id.date_execution_empty);
 
 			holder.mPersons = (GridView) view.findViewById(R.id.envelope_persons);
 			
@@ -134,7 +134,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 // remaining from envelope
 			holder.mEnvelopeRemaining.setText( o.getEnvelopeRemainingText() );
 			
-			if ( o.getEnvelope().getSize() < o.getEnvelopeRemaining()  ) {
+			if ( o.execution.getEnvelope().getSize() < o.getEnvelopeRemaining()  ) {
 				holder.mEnvelopeRemaining.setTextColor(Color.RED);
 				holder.mEnvelopeRemainingMessage.setText( context.getText(R.string.envelope_remaining_overdraft) );
 			}
@@ -142,23 +142,18 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 				holder.mEnvelopeRemaining.setTextColor(Color.GREEN);
 			
 			holder.mPersons.setAdapter(
-	        		new ExecutionPersonAdapter( 
-	        				context, 
-	        				o.getEnvelope().getPersons() ) ); 
+	        		new ExecutionPersonAdapter( context, o ) ); 
 			holder.mPersons.setOnItemClickListener(ExecutionPersonListener);
 
 			
-	        if ( o.getActualActivities().size() == 0)
-	        	holder.mDateExecutionEmpty.setVisibility(View.VISIBLE);
-	        else {
-	        	holder.mDateExecutionEmpty.setVisibility(View.GONE);
-	        	holder.mDateExecution.setAdapter( 
-	        			new ExecutionActualAdapter( 
-	        					context, 
-	        					o.getActualActivities() ) );        
+        	holder.mDateExecution.setEmptyView(holder.mDateExecutionEmpty);
+	        	
+        	holder.mDateExecution.setAdapter( 
+        			new ExecutionActualAdapter( 
+        					context, 
+        					o.getActualActivities() ) );        
 //				holder.mDateExecution.setOnItemClickListener(listener);
-				holder.mDateExecution.setItemsCanFocus(true);
-	        }
+			holder.mDateExecution.setItemsCanFocus(true);
 			
 		}
 		else {
@@ -263,7 +258,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 				String envelopeBegin = BudgetWork.calcEnvelopeBegin( dates[position] );
 				
 				// get current week execution
-				Execution executionData = new StoreEnvelope(envelopeBegin).getData(false);
+				Execution executionData = new StoreExecution(envelopeBegin).getData(false);
 
 				return BudgetWork.prepareDailyBudget( dates[position], executionData );
 

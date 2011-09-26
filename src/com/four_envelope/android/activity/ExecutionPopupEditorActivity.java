@@ -56,9 +56,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
    				BudgetWork.userData = new StoreUser().getData(refreshContent);
    				
 //get person daily expense
-				mPersonDailyExpense = new StoreDailyExpense(
-						mPersonId.toString(), 
-						mDate).getData();
+				mPersonDailyExpense = new StoreDailyExpense( mPersonId.toString(), mDate ).getData();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -141,9 +139,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 				mEditExpression.setValue( mEditorExpression.getText().toString() );
 				
 // update daily expense				
-				mPersonDailyExpense = new StoreDailyExpense(
-						mPersonId.toString(), 
-						mDate).setData(mEditExpression);
+				mPersonDailyExpense = new StoreDailyExpense( mPersonId.toString(), mDate ).setData(mEditExpression);
 
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -9,11 +9,11 @@ import com.four_envelope.android.store.StoreClient;
  * @author VMaximenko
  * 
  */
-public class RestEnvelope extends BaseObjectRest {
+public class RestExecution extends BaseObjectRest {
 
 	private String mEnvelopeBegin;
 	
-	public RestEnvelope(String envelopeBegin) {
+	public RestExecution(String envelopeBegin) {
 		mEnvelopeBegin = envelopeBegin;
 		
 		url = "/data/{user}/execution/{envelopeBegin}";

@@ -16,8 +16,9 @@ import com.four_envelope.android.adapter.DailyBudgetAdapter;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.DailyExpense;
+import com.four_envelope.android.model.Envelope;
 import com.four_envelope.android.model.Person;
-import com.four_envelope.android.store.StoreEnvelope;
+import com.four_envelope.android.store.StoreExecution;
 import com.four_envelope.android.store.StoreUser;
 
 /**
@@ -74,7 +75,7 @@ public class EnvelopeActivity extends BaseActivity {
 				String envelopeBegin = BudgetWork.calcEnvelopeBegin( mAdapter.getTodayDate() );
 				
 // get current week execution 
-    			new StoreEnvelope(envelopeBegin).getData(refreshContent);
+    			new StoreExecution(envelopeBegin).getData(refreshContent);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -127,14 +128,14 @@ public class EnvelopeActivity extends BaseActivity {
             	Bundle extras = data.getExtras();
 
             	DailyExpense personDailyExpense = (DailyExpense) extras.getSerializable(Extras.PERSON_DAILY_EXPENSE_RESULT);
-                Integer mPersonId = extras.getInt(Extras.EXECUTION_PERSON_ID);
-                String mDate = extras.getString(Extras.EXECUTION_DATE);
+                Integer personId = extras.getInt(Extras.EXECUTION_PERSON_ID);
 
                 int position = mViewFlow.getSelectedItemPosition();
                 
                 DailyBudget budget = mAdapter.getItem(position);
-                for (Person person : budget.getEnvelope().getPersons()) {
-					if ( person.getId().equals(mPersonId)) {
+                Envelope envelope = budget.execution.getEnvelope();
+                for (Person person : envelope.getPersons()) {
+					if ( person.getId().equals(personId)) {
 // replace daily expenses 						
 						person.getDailyExpenses().clear();
 						person.getDailyExpenses().add(personDailyExpense);
@@ -144,7 +145,13 @@ public class EnvelopeActivity extends BaseActivity {
 
                 budget.processEnvelope();
                 
-// TODO store envelope               
+                try {
+					new StoreExecution( envelope.getBegin() ).setData( budget.execution );
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 
                 mAdapter.putItem(position, budget);
                 

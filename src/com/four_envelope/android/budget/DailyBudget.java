@@ -11,6 +11,7 @@ import com.four_envelope.android.model.ActualGoalCredit;
 import com.four_envelope.android.model.ActualIncome;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Envelope;
+import com.four_envelope.android.model.Execution;
 import com.four_envelope.android.model.ExecutionActual;
 import com.four_envelope.android.model.Person;
 
@@ -25,7 +26,7 @@ public class DailyBudget {
 	public String date;
 	public Date executionDate;
 	public String title;
-	public Envelope envelope;
+	public Execution execution;
 	public int[] envelopeTotalLeft = new int[7];
 	
 	public Float envelopeSpent;
@@ -37,9 +38,6 @@ public class DailyBudget {
 	public ArrayList<ActualGoalCredit> actualGoalCredits = new ArrayList<ActualGoalCredit>();
 	
 
-	public Envelope getEnvelope() {
-		return envelope;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -50,7 +48,7 @@ public class DailyBudget {
 		todaySpent = 0f;
 
 		int[] envelopeTotalSpent = new int[7];
-		for (Person person : envelope.getPersons()) {
+		for (Person person : execution.getEnvelope().getPersons()) {
 			
 			int day = 0;
 			for (Iterator<DailyExpense> iterator = person.getDailyExpenses().iterator(); iterator.hasNext();) {
@@ -62,9 +60,11 @@ public class DailyBudget {
 				envelopeSpent += dailyExpense.getSum();
 				
 // left only one day
-				if ( !dailyExpense.getDate().equals( date ) )
-					iterator.remove();
-				else
+//				if ( !dailyExpense.getDate().equals( date ) )
+//					iterator.remove();
+//				else
+					
+				if ( dailyExpense.getDate().equals( date ) )					
 					todaySpent += dailyExpense.getSum();
 			}
 		}
@@ -80,7 +80,7 @@ public class DailyBudget {
 //				days--;
 //		}		
 			
-		envelopeRemaining = envelope.getSize() - envelopeSpent;
+		envelopeRemaining = execution.getEnvelope().getSize() - envelopeSpent;
 	}
 	
 	
@@ -95,7 +95,7 @@ public class DailyBudget {
 	}
 	
 	public CharSequence getEnvelopeSize() {
-		return BudgetWork.formatMoney( envelope.getSize() );
+		return BudgetWork.formatMoney( execution.getEnvelope().getSize() );
 	}
 	public CharSequence getEnvelopeSpent() {
 		return BudgetWork.formatMoney( envelopeSpent );

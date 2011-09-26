@@ -45,7 +45,7 @@ public class BudgetWork {
 		dailyBudget.executionDate = showDate;
 		dailyBudget.date = dfDate.format(showDate);
 		dailyBudget.title = dfTitle.format( dailyBudget.executionDate );
-		dailyBudget.envelope = execution.getEnvelope();
+		dailyBudget.execution = execution;
 		dailyBudget.processEnvelope();
 
 		ArrayList<ActualIncome> actualIncomes = execution.getActualIncomes();
@@ -133,48 +133,47 @@ public class BudgetWork {
 			return dfTitle.format(date);
 	}
 
-	/**
-	 * Count one day person sum expense
-	 * 
-	 * @param person
-	 * @return
-	 */
-	public static CharSequence getPersonDailyExpense(Person person) {
+	
+	public static DailyExpense getPersonDailyExpense(Person person, String date) {
 		ArrayList<DailyExpense> expenses = person.getDailyExpenses();
 		if (expenses == null || expenses.size() == 0)
+			return null;
+		
+		for (DailyExpense dailyExpense : expenses)
+			if ( dailyExpense.getDate().equals( date ) )
+				return dailyExpense;
+				
+		return null;
+	}
+	
+	/**
+	 * Count one day person sum expense
+	 */
+	public static CharSequence getPersonDailyExpenseSum(DailyExpense expense) {
+		if (expense == null)
 			return "";
 		
-		Float sum = expenses.get(0).getSum();
-		if (sum == null || sum.equals(new Float(0f)))
+		Float sum = expense.getSum();
+		if (sum == null || sum.equals( new Float(0f) ))
 			return "";
 		else
 			return formatMoney( sum, userData.getCurrency().getValue() );
 	}
 
-	public static String getPersonExpenseDate(Person person) {
-		ArrayList<DailyExpense> expenses = person.getDailyExpenses();
-		if (expenses == null || expenses.size() == 0)
-			return null;
-		else
-			return expenses.get(0).getDate();
-	}
-	
 	/**
 	 * Check person hasn't set daily expenses for the execution day earlier
 	 * than today
 	 */
-	public static boolean checkPersonHasntSetDailyExpense(Person person) {
-		ArrayList<DailyExpense> expenses = person.getDailyExpenses();
-		if (expenses == null || expenses.size() == 0)
+	public static boolean checkPersonHasntSetDailyExpense(DailyExpense expense) {
+		if (expense == null)
 			return false;
-
-		DailyExpense dailyExpense = expenses.get(0);
-		Float sum = dailyExpense.getSum();
+		
+		Float sum = expense.getSum();
 		
 		Date today = new Date();
 		Date executionDate;
 		try {
-			executionDate = dfDate.parse( dailyExpense.getDate() );
+			executionDate = dfDate.parse( expense.getDate() );
 		} catch (ParseException e) {
 			executionDate = today;
 		}

@@ -8,6 +8,7 @@ import com.four_envelope.android.store.StoreClient;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -133,17 +134,22 @@ public class AuthenticatorActivity extends Activity implements UpdateListener {
     
 	@Override
 	public void onUpdate() {
-		if ( !mAuthorizeOperation.isInProgress() )
+		if ( mAuthorizeOperation.isInProgress() )
+			return; 
+		else
 			hideProgress();
+
+		if (!mAuthorizeOperation.isComplited() && !mAuthorizeOperation.isSuccessLogin)
+			mMessage.setText( getText(R.string.login_fail_text_password_only) );
 		
-		if ( mAuthorizeOperation.isComplited() ) {
-// Called when the authentication process completes.
-	        if (mAuthorizeOperation.isSuccessLogin)
-	        	finishLogin();
-	        else
-	            mMessage.setText(
-	            		getText(R.string.login_fail_text_password_only) );
-		}
+		// Called when the authentication process completes.
+		if (mAuthorizeOperation.isComplited() && mAuthorizeOperation.isSuccessLogin)
+			finishLogin();
+	}
+
+	@Override
+	public Context getUpdateContext() {
+		return getApplicationContext();
 	}
 
 }

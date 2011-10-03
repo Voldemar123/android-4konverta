@@ -65,10 +65,6 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.i(getClass().getSimpleName(), "onActivityResult");
-		Log.i(getClass().getSimpleName(), Integer.toString(requestCode));
-		Log.i(getClass().getSimpleName(), Integer.toString(resultCode));
-
 		if (requestCode == Invoke.Extras.AUTH_REQUEST) {
             if (resultCode == RESULT_OK) {
             	requestPageContent();

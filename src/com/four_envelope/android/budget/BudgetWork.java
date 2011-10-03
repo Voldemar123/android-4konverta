@@ -166,9 +166,11 @@ public class BudgetWork {
 	 */
 	public static boolean checkPersonHasntSetDailyExpense(DailyExpense expense) {
 		if (expense == null)
-			return false;
+			return true;
 		
 		Float sum = expense.getSum();
+		if (sum > 0)
+			return false;
 		
 		Date today = new Date();
 		Date executionDate;

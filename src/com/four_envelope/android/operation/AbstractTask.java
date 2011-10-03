@@ -1,6 +1,5 @@
 package com.four_envelope.android.operation;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -43,9 +42,9 @@ public abstract class AbstractTask<Params, Result> extends
 	protected void onPostExecute(ResultOrException<Result> result) {
 		super.onPostExecute(result);
 
-		Context appContext = (Context) this.context;
 		if (result.exception != null)
-			Toast.makeText(appContext, result.exception.getString(appContext),
+			Toast.makeText( context.getUpdateContext(), 
+					result.exception.getString( context.getUpdateContext() ),
 					Toast.LENGTH_LONG).show();
 		else
 			onSuccess(result.result);

@@ -2,6 +2,7 @@ package com.four_envelope.android.store;
 
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.Execution;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.RestExecution;
 
 /**
@@ -18,12 +19,12 @@ public class StoreExecution extends BaseObjectStore {
 		mObjectFileName = mObjectPathName + "/" + envelopeBegin;
 	}
 	
-	public Execution getData(boolean update) throws Exception {
+	public Execution getData(boolean update) throws LocalizedException {
 		mNeedUpdate = update;
 		return (Execution) processObject();
 	}
 
-	public Execution setData(Execution execution) throws Exception {
+	public Execution setData(Execution execution) throws LocalizedException {
 		storeObject( execution );
 		
 		return getData(false);

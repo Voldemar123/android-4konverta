@@ -2,6 +2,7 @@ package com.four_envelope.android.adapter;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.taptwo.android.widget.TitleProvider;
 
@@ -10,12 +11,12 @@ import com.four_envelope.android.activity.Invoke;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.Execution;
-import com.four_envelope.android.store.StoreExecution;
+import com.four_envelope.android.operation.PrepareBudgetOperation;
+import com.four_envelope.android.operation.UpdateListener;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ import android.widget.TextView;
  * @author VMaximenko
  *
  */
-public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
+public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, UpdateListener {
 
 	private LayoutInflater mInflater;
 	private Context context;
@@ -41,8 +42,10 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 	private static final int daysDepth = 10;
 	private static final int daysSize = daysDepth * 2 + 1;
 	
-	private static Date[] dates = new Date[ daysSize ];
-	private static DailyBudget[] budgets = new DailyBudget[ daysSize ];
+	public Date[] dates = new Date[ daysSize ];
+	public DailyBudget[] budgets = new DailyBudget[ daysSize ];
+	
+	public HashMap<String, Execution> weekExecution = new HashMap<String, Execution>();
 	
 
 	private class ViewHolder {
@@ -65,6 +68,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 	
 	public DailyBudgetAdapter(Context context) {
 		this.context = context;
+		
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		prepareDates();
 	}
@@ -143,8 +147,23 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 			
 			holder.mPersons.setAdapter(
 	        		new ExecutionPersonAdapter( context, o ) ); 
-			holder.mPersons.setOnItemClickListener(ExecutionPersonListener);
 
+			// launch execution pop-up editor after click on person	
+			holder.mPersons.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+					ExecutionPersonAdapter.ViewHolder holder = (ExecutionPersonAdapter.ViewHolder) view.getTag();
+
+					Invoke.User.executionPopupEditor(
+							(Activity) context,
+							holder.mPersonId, 
+							holder.mPersonName, 
+							holder.mDate);
+				}
+
+			});
 			
         	holder.mDateExecution.setEmptyView(holder.mDateExecutionEmpty);
 	        	
@@ -159,7 +178,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 		else {
 			Log.i(getClass().getSimpleName(), "---");
 			
-			new PrepareBudgetTask().execute(position, view);
+			new PrepareBudgetOperation(this).execute(position, view);
 
 			holder.mExecutionLayoutEnvelopeSpentRemaining.setVisibility(View.GONE);
 			holder.mExecutionLayoutAccountExecution.setVisibility(View.GONE);
@@ -218,63 +237,13 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider {
 		}
 	}
 	
-// launch execution pop-up editor after click on person	
-	private OnItemClickListener ExecutionPersonListener = new OnItemClickListener() {
+	@Override
+	public void onUpdate() {
+	}
 
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-			ExecutionPersonAdapter.ViewHolder holder = (ExecutionPersonAdapter.ViewHolder) view.getTag();
-
-			Log.i(getClass().getSimpleName(), holder.mPersonId.toString());
-			Log.i(getClass().getSimpleName(), holder.mName.getText().toString());
-			
-			Invoke.User.executionPopupEditor(
-					(Activity)context, 
-					holder.mPersonId, 
-					holder.mPersonName, 
-					holder.mDate);
-		}
-
-	};	
+	@Override
+	public Context getUpdateContext() {
+		return context;
+	}
 	
-/**
- * Prepare daily budget and current week envelope data	
- * @author VMaximenko
- *
- */
-	private class PrepareBudgetTask extends AsyncTask<Object, Object, Object> {
-		
-		private Integer position;
-		private View view;
-		
-		@Override
-		protected DailyBudget doInBackground(Object... arg) {
-			position = (Integer) arg[0];
-			view = (View) arg[1];
-
-			try {
-				// look for envelope begin date
-				String envelopeBegin = BudgetWork.calcEnvelopeBegin( dates[position] );
-				
-				// get current week execution
-				Execution executionData = new StoreExecution(envelopeBegin).getData(false);
-
-				return BudgetWork.prepareDailyBudget( dates[position], executionData );
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-
-		protected void onPostExecute(Object result) {
-	    	 budgets[position] = (DailyBudget) result;
-	    	 
-	    	 drawView(position, view);
-	    	 
-	    	 view.postInvalidate();
-	     }
-
-	}	
 }

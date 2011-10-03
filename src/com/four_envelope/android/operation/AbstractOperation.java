@@ -1,7 +1,5 @@
 package com.four_envelope.android.operation;
 
-import android.content.Context;
-
 /**
  * Асинхронная операция и связанные с этим накладные функции.
  * 

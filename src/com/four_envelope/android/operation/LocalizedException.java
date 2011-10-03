@@ -9,7 +9,8 @@ import android.content.Context;
  * 
  */
 public class LocalizedException extends Exception {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 511553950546209386L;
 
 	/**
 	 * Идентификатор ресурса с описанием ошибки.

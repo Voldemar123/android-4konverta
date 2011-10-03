@@ -1,6 +1,7 @@
 package com.four_envelope.android.rest;
 
 import com.four_envelope.android.model.Execution;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.store.StoreClient;
 
 /**
@@ -28,13 +29,13 @@ public class RestExecution extends BaseObjectRest {
 		setUrlParam("envelopeBegin", mEnvelopeBegin);
 	}
 	
-	public Execution retrieve() throws Exception {
+	public Execution retrieve() throws LocalizedException {
 		setUpParams();
 		
 		return doGetObject(Execution.class);
 	}
 
-	public Execution update(Object obj) throws Exception {
+	public Execution update(Object obj) throws LocalizedException {
 		return null;
 	}
 

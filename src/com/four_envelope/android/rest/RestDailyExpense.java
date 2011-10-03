@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Expression;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.store.StoreClient;
 
 /**
@@ -28,13 +29,13 @@ public class RestDailyExpense extends BaseObjectRest {
 		setUrlParam("date", mDate);
 	}
 	
-	public DailyExpense retrieve() throws Exception {
+	public DailyExpense retrieve() throws LocalizedException {
 		setUpParams();
 		
 		return doGetObject(DailyExpense.class);
 	}
 
-	public DailyExpense update(Object obj) throws Exception {
+	public DailyExpense update(Object obj) throws LocalizedException {
 		setUpParams();
 
 		return doPostObject(

@@ -15,6 +15,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import com.four_envelope.android.Constants;
+import com.four_envelope.android.R;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.store.StoreClient;
 
 import android.util.Log;
@@ -47,7 +49,7 @@ public class BaseRest {
 		return request;
 	}
 	
-    protected String doGet() throws Exception {
+    protected String doGet() throws LocalizedException {
     	Log.i(getClass().getSimpleName(), "doGet");
     	Log.i(getClass().getSimpleName(), url);
     	
@@ -60,10 +62,10 @@ public class BaseRest {
             
             final int statusCode = getResponse.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_UNAUTHORIZED)
-            	throw new UnauthorizedClientException();
+            	throw new LocalizedException( R.string.error_unauthorized_client );
             	
             if (statusCode != HttpStatus.SC_OK)
-            	throw new RestClientException();
+            	throw new LocalizedException( R.string.error_rest_client_status );
  
             HttpEntity getResponseEntity = getResponse.getEntity();
             if (getResponseEntity != null)
@@ -71,7 +73,7 @@ public class BaseRest {
  
         }
         catch (IOException e) {
-        	throw new RestClientException(e);
+        	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         finally {
         	getRequest.abort();
@@ -80,7 +82,7 @@ public class BaseRest {
     }    
 	
 	
-    protected String doPost(String content) throws Exception {
+    protected String doPost(String content) throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "doPost");
 		Log.i(getClass().getSimpleName(), url);
 		Log.i(getClass().getSimpleName(), content);
@@ -98,14 +100,14 @@ public class BaseRest {
 
 			final int statusCode = postResponse.getStatusLine().getStatusCode();
 			if (statusCode != HttpStatus.SC_OK)
-				throw new RestClientException();
+				throw new LocalizedException( R.string.error_rest_client_status );
 
 			HttpEntity postResponseEntity = postResponse.getEntity();
             if (postResponseEntity != null)
                 return EntityUtils.toString(postResponseEntity);			
 
 		} catch (IOException e) {
-			throw new RestClientException(e);
+			throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
 		}
 		finally {
 			postRequest.abort();

@@ -1,18 +1,18 @@
 package com.four_envelope.android.activity;
 
 import com.four_envelope.android.R;
-import com.four_envelope.android.budget.BudgetWork;
-import com.four_envelope.android.model.User;
+import com.four_envelope.android.operation.AuthorizeOperation;
+import com.four_envelope.android.operation.UpdateListener;
 import com.four_envelope.android.store.StoreClient;
-import com.four_envelope.android.store.StoreUser;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -21,24 +21,23 @@ import android.widget.TextView;
 /**
  * Activity which displays login screen to the user.
  */
-public class AuthenticatorActivity extends Activity {
-    /** Was the original caller asking for an entirely new account? */
-    protected boolean mRequestNewAccount = false;
+public class AuthenticatorActivity extends Activity implements UpdateListener {
+
+	private AuthorizeOperation mAuthorizeOperation;
     
     private TextView mMessage;
 
-    private String mPassword;
-    private EditText mPasswordEdit;
+    private String mUsername, mPassword;
+    private EditText mUsernameEdit, mPasswordEdit;
 
-    private String mUsername;
-    private EditText mUsernameEdit;
 
     @Override
     public void onCreate(Bundle icicle) {        
         super.onCreate(icicle);
 
+        mAuthorizeOperation = new AuthorizeOperation(this);
+        
         mUsername = StoreClient.getLogin();
-        mRequestNewAccount = (mUsername == null);
         
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -48,7 +47,6 @@ public class AuthenticatorActivity extends Activity {
         mPasswordEdit = (EditText) findViewById(R.id.password_edit);
 
 //        mUsernameEdit.setText(mUsername);
-//        
 //        mPasswordEdit.setText(StoreClient.getPassword());
 
         mMessage = (TextView) findViewById(R.id.message);
@@ -61,18 +59,17 @@ public class AuthenticatorActivity extends Activity {
         
         dialog.setMessage(getText(R.string.ui_activity_authenticating));
         dialog.setIndeterminate(true);
-//        dialog.setCancelable(true);
+        dialog.setCancelable(true);
         
-//        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//            public void onCancel(DialogInterface dialog) {
-//                Log.i(getClass().getSimpleName(), "dialog cancel has been invoked");
-//
-//            }
-//        });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+            	mAuthorizeOperation.cancel();
+            }
+        });
         
         return dialog;
     }
-
+    
     /**
      * Handles onClick event on the Submit button. Sends username/password to
      * the server for authentication.
@@ -86,44 +83,19 @@ public class AuthenticatorActivity extends Activity {
         if (TextUtils.isEmpty(mUsername) || TextUtils.isEmpty(mPassword)) {
             mMessage.setText(getMessage());
         } else {
-            showProgress();
-
-    		StoreClient.setLogin(mUsername);
-    		StoreClient.setPassword(mPassword);
+        	showProgress();
 
             // Start authenticating...
-            new GetInfo().execute();
-        }
-    }
-
-    /**
-     * Called when the authentication process completes.
-     */
-    public void onAuthenticationResult(boolean result) {
-        // Hide the progress dialog
-        hideProgress();
-
-        if (result)
-        	finishLogin();
-        else {
-
-        	if (mRequestNewAccount)
-                mMessage.setText(getText(R.string.login_fail_text_both));
-            else
-                mMessage.setText(getText(R.string.login_fail_text_password_only));
+            mAuthorizeOperation.execute( mUsername, mPassword );
         }
     }
 
     /**
      * 
-     * Called when response is received from the server for authentication
-     * request. See onAuthenticationResult(). Sets the
-     * AccountAuthenticatorResult which is sent back to the caller. Also sets
-     * the authToken in AccountManager for this account.
-     * 
+     * Called when response is received from the server for authentication request. 
+     * Sets the AccountAuthenticatorResult which is sent back to the caller. 
      * @param the confirmCredentials result.
      */
-
     protected void finishLogin() {
         final Intent intent = new Intent();
         setResult(RESULT_OK, intent);
@@ -134,14 +106,14 @@ public class AuthenticatorActivity extends Activity {
      * Returns the message to be displayed at the top of the login dialog box.
      */
     private CharSequence getMessage() {
-        if (TextUtils.isEmpty(mUsername)) {
-            // If no username, then we ask the user to log in using an appropriate service.
+        // If no username, then we ask the user to log in using an appropriate service.
+        if (TextUtils.isEmpty(mUsername))
         	return getText(R.string.new_account_text);
-        }
-        if (TextUtils.isEmpty(mPassword)) {
-            // We have an account but no password
+
+        // We have an account but no password
+        if (TextUtils.isEmpty(mPassword))
             return getText(R.string.login_fail_text_password_missing);
-        }
+
         return null;
     }
 
@@ -159,28 +131,19 @@ public class AuthenticatorActivity extends Activity {
         dismissDialog(0);
     }
     
-    
-	private class GetInfo extends AsyncTask<String, Void, User> {
-
-		@Override
-		protected User doInBackground(String... params) {
-
-			try {
-				User userData = new StoreUser().getData(true);
-				BudgetWork.userData = userData;
-				
-				return userData;
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
+	@Override
+	public void onUpdate() {
+		if ( !mAuthorizeOperation.isInProgress() )
+			hideProgress();
+		
+		if ( mAuthorizeOperation.isComplited() ) {
+// Called when the authentication process completes.
+	        if (mAuthorizeOperation.isSuccessLogin)
+	        	finishLogin();
+	        else
+	            mMessage.setText(
+	            		getText(R.string.login_fail_text_password_only) );
 		}
-
-		protected void onPostExecute(User user) {
-			onAuthenticationResult(user != null);
-		}
-
 	}
 
 }

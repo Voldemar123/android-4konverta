@@ -2,6 +2,7 @@ package com.four_envelope.android.store;
 
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.User;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.RestUser;
 
 /**
@@ -18,7 +19,7 @@ public class StoreUser extends BaseObjectStore {
 		mObjectFileName = mObjectPathName + "/user";
 	}
 	
-	public User getData(boolean update) throws Exception {
+	public User getData(boolean update) throws LocalizedException {
 		mNeedUpdate = update;
 		return (User) processObject();
 	}

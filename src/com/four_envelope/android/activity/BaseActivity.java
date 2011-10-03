@@ -47,7 +47,8 @@ public abstract class BaseActivity extends Activity {
         setContentView(mContentView);
         
 		StoreClient.setPreferences( getSharedPreferences( Constants.APP_PREFS_NAME, 0) );
-
+//		StoreClient.logout();
+		
 		dialog = new ProgressDialog(this);
 		dialog.setMessage( getText( mProgressRes ) );
 		
@@ -119,8 +120,13 @@ public abstract class BaseActivity extends Activity {
 				return true;
 
 			case R.id.menu_refresh:
-				refreshContent = true;
-				requestPageContent();
+				if ( StoreClient.isLogged() ) {
+					refreshContent = true;
+					requestPageContent();
+				}
+		        else
+		        	Invoke.User.authenticate(this);
+				
 				return true;
 				
 			default:

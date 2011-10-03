@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.StreamCorruptedException;
 
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.BaseObjectRest;
 
 import android.os.Environment;
@@ -32,7 +33,7 @@ public class BaseObjectStore {
 	private boolean mExternalStorageAvailable, mExternalStorageWriteable;
 
 	
-	public Object processObject() throws Exception {
+	public Object processObject() throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "processObject");
 
 //		mStoredObject = storedObject;

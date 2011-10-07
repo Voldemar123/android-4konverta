@@ -1,6 +1,7 @@
 package com.four_envelope.android.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -10,8 +11,8 @@ import com.four_envelope.android.R;
 import com.four_envelope.android.adapter.AccountAdapter;
 import com.four_envelope.android.adapter.PersonAdapter;
 import com.four_envelope.android.budget.BudgetWork;
+import com.four_envelope.android.operation.RequestStatusOperation;
 import com.four_envelope.android.store.StoreClient;
-import com.four_envelope.android.store.StoreUser;
 
 /**
  * Show client status page, user properties, accounts
@@ -42,25 +43,12 @@ public class StatusActivity extends BaseActivity {
         mAccountLogin = (TextView) findViewById(R.id.account_login);
 	}
 
-    protected class RequestStatusTask extends BaseRequestContentTask {
-		
-		protected Object doInBackground(Object... arg) {
-			try {
-				BudgetWork.userData = new StoreUser().getData(refreshContent);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			return null;
-		}
-		
-	}	    
-	
     protected void requestPageContent() {
     	super.requestPageContent();
     	
-    	new RequestStatusTask().execute();
+    	Log.i(getClass().getSimpleName(), "--- refreshContent " + Boolean.toString(refreshContent));
+    	
+    	new RequestStatusOperation(this).execute();
 	}
     
 	void fillPageContent() {
@@ -79,6 +67,6 @@ public class StatusActivity extends BaseActivity {
 				new AccountAdapter(
 						this, 
 						BudgetWork.userData.getAccounts() ) );
-	} 
-	
+	}
+
 }

@@ -13,13 +13,12 @@ import android.view.View;
 import com.four_envelope.android.R;
 import com.four_envelope.android.activity.Invoke.Extras;
 import com.four_envelope.android.adapter.DailyBudgetAdapter;
-import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Envelope;
 import com.four_envelope.android.model.Person;
+import com.four_envelope.android.operation.RequestExecutionOperation;
 import com.four_envelope.android.store.StoreExecution;
-import com.four_envelope.android.store.StoreUser;
 
 /**
  * Show the day from weekly envelope with daily expenses  
@@ -29,28 +28,28 @@ import com.four_envelope.android.store.StoreUser;
 public class EnvelopeActivity extends BaseActivity {
 
 	private ViewFlow mViewFlow;
-	private DailyBudgetAdapter mAdapter;
-	private int mViewFlowPosition;
+	public DailyBudgetAdapter adapter;
+	public int viewFlowPosition;
 	
     public void onCreate(Bundle savedInstanceState) {
 		mContentView = R.layout.envelope_day_flow_view;
 		mMenuRes = R.menu.envelope_menu;
 		mProgressRes = R.string.progress_envelope_msg;
 		
-		mAdapter = new DailyBudgetAdapter(this);
+		adapter = new DailyBudgetAdapter(this);
 
-		setTitle( mAdapter.getTitle( mAdapter.getTodayId() ) );
+		setTitle( adapter.getTitle( adapter.getTodayId() ) );
 
 		super.onCreate(savedInstanceState);
         
 		mViewFlow = (ViewFlow) findViewById(R.id.envelope_viewflow);
 
-		mViewFlowPosition = mAdapter.getTodayId();
+		viewFlowPosition = adapter.getTodayId();
 		
 		mViewFlow.setOnViewSwitchListener(new ViewSwitchListener() {
 		    public void onSwitched(View v, int position) {
-		    	mViewFlowPosition = position;
-		    	setTitle( mAdapter.getTitle(position) );
+		    	viewFlowPosition = position;
+		    	setTitle( adapter.getTitle(position) );
 		    }
 		});
 		
@@ -63,45 +62,22 @@ public class EnvelopeActivity extends BaseActivity {
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
     
-    protected class RequestEnvelopeTask extends BaseRequestContentTask {
-		
-		protected Object doInBackground(Object... arg) {
-			
-			try {
-// get user properties
-				BudgetWork.userData = new StoreUser().getData(refreshContent);
-			
-// look for envelope begin date    			
-				String envelopeBegin = BudgetWork.calcEnvelopeBegin( mAdapter.getTodayDate() );
-				
-// get current week execution 
-    			new StoreExecution(envelopeBegin).getData(refreshContent);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-		
-	}	    
-	
     protected void requestPageContent() {
     	super.requestPageContent();
     	
-    	new RequestEnvelopeTask().execute();
+    	new RequestExecutionOperation(this).execute();
 	}
 	
 	void fillPageContent() {
-		mAdapter.clearDailyBudget();
-		mViewFlow.setAdapter(mAdapter, mViewFlowPosition);
+		adapter.clearDailyBudget();
+		mViewFlow.setAdapter(adapter, viewFlowPosition);
 	}
 	
     public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		
 			case R.id.menu_today:
-				mViewFlow.setSelection( mAdapter.getTodayId() );
+				mViewFlow.setSelection( adapter.getTodayId() );
 				return true;
 
 			case R.id.menu_back:
@@ -132,7 +108,7 @@ public class EnvelopeActivity extends BaseActivity {
 
                 int position = mViewFlow.getSelectedItemPosition();
                 
-                DailyBudget budget = mAdapter.getItem(position);
+                DailyBudget budget = adapter.getItem(position);
                 Envelope envelope = budget.execution.getEnvelope();
                 for (Person person : envelope.getPersons()) {
 					if ( person.getId().equals(personId)) {
@@ -153,10 +129,10 @@ public class EnvelopeActivity extends BaseActivity {
 					e.printStackTrace();
 				}
                 
-                mAdapter.putItem(position, budget);
+                adapter.putItem(position, budget);
                 
                 View view = mViewFlow.getSelectedView();
-                mAdapter.drawView(position, view);
+                adapter.drawView(position, view);
                 view.invalidate();
                 
             	Log.i(getClass().getSimpleName(), Float.toString(personDailyExpense.getSum()));

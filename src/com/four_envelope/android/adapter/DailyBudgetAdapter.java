@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.taptwo.android.widget.TitleProvider;
 
 import com.four_envelope.android.R;
+import com.four_envelope.android.activity.EnvelopeActivity;
 import com.four_envelope.android.activity.Invoke;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
@@ -14,7 +15,6 @@ import com.four_envelope.android.model.Execution;
 import com.four_envelope.android.operation.PrepareBudgetOperation;
 import com.four_envelope.android.operation.UpdateListener;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -37,7 +37,7 @@ import android.widget.TextView;
 public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, UpdateListener {
 
 	private LayoutInflater mInflater;
-	private Context context;
+	public EnvelopeActivity activity;
 
 	private static final int daysDepth = 10;
 	private static final int daysSize = daysDepth * 2 + 1;
@@ -66,8 +66,8 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 		GridView mPersons;
 	}
 	
-	public DailyBudgetAdapter(Context context) {
-		this.context = context;
+	public DailyBudgetAdapter(EnvelopeActivity context) {
+		this.activity = context;
 		
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		prepareDates();
@@ -140,13 +140,13 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 			
 			if ( o.execution.getEnvelope().getSize() < o.getEnvelopeRemaining()  ) {
 				holder.mEnvelopeRemaining.setTextColor(Color.RED);
-				holder.mEnvelopeRemainingMessage.setText( context.getText(R.string.envelope_remaining_overdraft) );
+				holder.mEnvelopeRemainingMessage.setText( activity.getText(R.string.envelope_remaining_overdraft) );
 			}
 			else 
 				holder.mEnvelopeRemaining.setTextColor(Color.GREEN);
 			
 			holder.mPersons.setAdapter(
-	        		new ExecutionPersonAdapter( context, o ) ); 
+	        		new ExecutionPersonAdapter( activity, o ) ); 
 
 			// launch execution pop-up editor after click on person	
 			holder.mPersons.setOnItemClickListener(new OnItemClickListener() {
@@ -157,7 +157,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 					ExecutionPersonAdapter.ViewHolder holder = (ExecutionPersonAdapter.ViewHolder) view.getTag();
 
 					Invoke.User.executionPopupEditor(
-							(Activity) context,
+							activity,
 							holder.mPersonId, 
 							holder.mPersonName, 
 							holder.mDate);
@@ -169,7 +169,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	        	
         	holder.mDateExecution.setAdapter( 
         			new ExecutionActualAdapter( 
-        					context, 
+        					activity, 
         					o.getActualActivities() ) );        
 //				holder.mDateExecution.setOnItemClickListener(listener);
 			holder.mDateExecution.setItemsCanFocus(true);
@@ -213,6 +213,8 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	public void clearDailyBudget() {
 		for (int i = 0; i < budgets.length ; i++)
 			budgets[i] = null;
+		
+		weekExecution.clear();
 	}
 
 	/**
@@ -243,7 +245,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 
 	@Override
 	public Context getUpdateContext() {
-		return context;
+		return activity.getApplicationContext();
 	}
 	
 }

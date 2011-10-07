@@ -5,6 +5,7 @@ import android.util.Log;
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Expression;
+import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.RestDailyExpense;
 
 /**
@@ -21,13 +22,13 @@ public class StoreDailyExpense extends BaseObjectStore {
 		mObjectFileName = mObjectPathName + "/" + date;
 	}
 	
-	public DailyExpense getData() throws Exception {
+	public DailyExpense getData() throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "getData nObjectFileName " + mObjectFileName);
 		
 		return (DailyExpense) processObject();
 	}
 
-	public DailyExpense setData(Expression expression) throws Exception {
+	public DailyExpense setData(Expression expression) throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "setData nObjectFileName " + mObjectFileName);
 		
 		storeObject( mRestClient.update(expression) );

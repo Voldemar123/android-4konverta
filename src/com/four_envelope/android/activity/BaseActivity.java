@@ -2,12 +2,13 @@ package com.four_envelope.android.activity;
 
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.R;
+import com.four_envelope.android.operation.UpdateListener;
 import com.four_envelope.android.store.StoreClient;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,30 +16,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements UpdateListener {
 
-	protected AsyncTask<Object, Object, Object> mGetContent;
+//	protected AsyncTask<Object, Object, Object> mGetContent;
 	protected int mContentView; 
 	
 	protected int mMenuRes = R.menu.base_menu;
 	protected int mProgressRes = R.string.progress_msg_load;
 	
-	protected boolean refreshContent;
+	public boolean refreshContent;
 	
 	public ProgressDialog dialog;
 	
-    protected class BaseRequestContentTask extends AsyncTask<Object, Object, Object> {
-		
-		protected Object doInBackground(Object... arg) {
-			return null;
-		}
 
-		protected void onPostExecute(Object result) {
-			fillPageContent();			
-			hideProgress();
-		}
-	}	    
-	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -129,5 +119,16 @@ public abstract class BaseActivity extends Activity {
 				return super.onOptionsItemSelected(item);
 		}
     }
+
+    @Override
+	public Context getUpdateContext() {
+		return getApplicationContext();
+	}
+    
+	@Override
+	public void onUpdate() {
+		fillPageContent();			
+		hideProgress();
+	}
     
 }

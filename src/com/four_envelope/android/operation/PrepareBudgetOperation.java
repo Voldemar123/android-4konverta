@@ -15,46 +15,46 @@ import com.four_envelope.android.store.StoreExecution;
  */
 public class PrepareBudgetOperation extends AbstractOperation<Object, DailyBudget> {
 
-	private Integer position;
-	private View view;
-	private DailyBudgetAdapter adapter;
+	private Integer mPosition;
+	private View mView;
+	private DailyBudgetAdapter mAdapter;
 	
 	public PrepareBudgetOperation(UpdateListener context) {
 		super(context);
-		adapter = (DailyBudgetAdapter) context;
+		mAdapter = (DailyBudgetAdapter) context;
 	}
 
 	@Override
 	DailyBudget process(Object... params) throws LocalizedException {
-		position = (Integer) params[0];
-		view = (View) params[1];
+		mPosition = (Integer) params[0];
+		mView = (View) params[1];
 		
 		// look for envelope begin date
-		String envelopeBegin = BudgetWork.calcEnvelopeBegin( adapter.dates[position] );
+		String envelopeBegin = BudgetWork.calcEnvelopeBegin( mAdapter.dates[mPosition] );
 		
 //check exist execution data
 		Execution executionData;
 //TODO for speed rewrite this code				
-		if ( adapter.weekExecution.containsKey(envelopeBegin) )
-			executionData = adapter.weekExecution.get(envelopeBegin);
+		if ( mAdapter.weekExecution.containsKey(envelopeBegin) )
+			executionData = mAdapter.weekExecution.get(envelopeBegin);
 		else {
 			// get current week execution
-			executionData = new StoreExecution(envelopeBegin).getData(false);
+			executionData = new StoreExecution(envelopeBegin).getData( mAdapter.activity.refreshContent );
 			
-			adapter.weekExecution.put( envelopeBegin, executionData );
+			mAdapter.weekExecution.put( envelopeBegin, executionData );
 		}
 
 		return BudgetWork.prepareDailyBudget( 
-				adapter.dates[position], 
+				mAdapter.dates[mPosition], 
 				executionData );
 	}
 
 	@Override
 	void onSuccess(DailyBudget result) {
-		adapter.budgets[position] = result;
+		mAdapter.budgets[mPosition] = result;
 		
-		adapter.drawView(position, view);
-   	 	view.postInvalidate();
+		mAdapter.drawView(mPosition, mView);
+		mView.postInvalidate();
 	}
 
 	@Override

@@ -8,8 +8,8 @@ import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.Account;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Expression;
+import com.four_envelope.android.operation.RequesDailyExpenseOperation;
 import com.four_envelope.android.store.StoreDailyExpense;
-import com.four_envelope.android.store.StoreUser;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,7 +28,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 	
 	private Integer mPersonId;
 	private String mDate, mPersonName;
-	private DailyExpense mPersonDailyExpense;
+	public DailyExpense personDailyExpense;
 	private Expression mEditExpression;
 	
     @Override
@@ -48,28 +48,10 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
         mExpensePersonName = (TextView) findViewById(R.id.execution_person);
     }
     
-    protected class RequestExecutionTask extends BaseRequestContentTask {
-		
-		protected Object doInBackground(Object... arg) {
-			try {
-//get user properties
-   				BudgetWork.userData = new StoreUser().getData(refreshContent);
-   				
-//get person daily expense
-				mPersonDailyExpense = new StoreDailyExpense( mPersonId.toString(), mDate ).getData();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-	}	    
-	
     protected void requestPageContent() {
     	super.requestPageContent();
     	
-    	new RequestExecutionTask().execute();
+    	new RequesDailyExpenseOperation(this).execute( mPersonId, mDate );
 	}
     
 	void fillPageContent() {
@@ -77,13 +59,13 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 		
 // default account expression
 		String defaultCurrency = BudgetWork.userData.getCurrency().getId();
-		Log.i(getClass().getSimpleName(), mPersonDailyExpense.getDefaultAccount().toString());
+		Log.i(getClass().getSimpleName(), personDailyExpense.getDefaultAccount().toString());
 		
-		if ( mPersonDailyExpense.getExpressions() != null) {
-			for (Expression expression : mPersonDailyExpense.getExpressions()) {
+		if ( personDailyExpense.getExpressions() != null) {
+			for (Expression expression : personDailyExpense.getExpressions()) {
 				Log.i(getClass().getSimpleName(), expression.getAccount().toString());
 				
-				if ( expression.getAccount().equals( mPersonDailyExpense.getDefaultAccount() )) {
+				if ( expression.getAccount().equals( personDailyExpense.getDefaultAccount() )) {
 					Log.i(getClass().getSimpleName(), expression.getValue());
 
 					mEditExpression = expression;
@@ -98,7 +80,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 			mEditExpression = new Expression();
 			
 			mEditExpression.setCurrency(defaultCurrency);
-			mEditExpression.setAccount(mPersonDailyExpense.getDefaultAccount());
+			mEditExpression.setAccount(personDailyExpense.getDefaultAccount());
 		}
 
         mAccounts.setAdapter( new AccountSpinnerAdapter( 
@@ -139,7 +121,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 				mEditExpression.setValue( mEditorExpression.getText().toString() );
 				
 // update daily expense				
-				mPersonDailyExpense = new StoreDailyExpense( mPersonId.toString(), mDate ).setData(mEditExpression);
+				personDailyExpense = new StoreDailyExpense( mPersonId.toString(), mDate ).setData(mEditExpression);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -156,7 +138,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 
 			Intent intent = new Intent();
 			
-			intent.putExtra( Extras.PERSON_DAILY_EXPENSE_RESULT, mPersonDailyExpense );
+			intent.putExtra( Extras.PERSON_DAILY_EXPENSE_RESULT, personDailyExpense );
 			intent.putExtra( Extras.EXECUTION_PERSON_ID, mPersonId );
 			intent.putExtra( Extras.EXECUTION_DATE, mDate );
 			

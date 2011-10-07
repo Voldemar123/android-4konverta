@@ -26,7 +26,7 @@ public abstract class AbstractTask<Params, Result> extends
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		context.onUpdate();
+//		context.onUpdate();
 	}
 
 	@Override

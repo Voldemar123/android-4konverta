@@ -6,6 +6,8 @@ import java.io.StringReader;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import android.util.Log;
+
 import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
 
@@ -28,16 +30,12 @@ public abstract class BaseObjectRest extends BaseRest {
 		if (xml == null || xml.length() == 0)
 			return null;
 
-		Reader reader = new StringReader(xml);
+		Reader reader = new StringReader( clearHTML(xml) );
 		try {
-//			T result = serializer.read( type, reader, false ); 
-//
-//			if ( reader != null )
-//				reader.close();
-
 			return serializer.read( type, reader, false );
-			
+
 		} catch (Exception e) {
+			Log.i(getClass().getSimpleName(), e.getMessage());
 			throw new LocalizedException( R.string.error_resource_access, e.getMessage() );
 		}
 	}

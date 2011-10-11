@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">4konverta</string>
+    <string name="app_name">4 конверта</string>
+
+	<string name="error_resource_access">ошибка разбора данных</string>
+	<string name="error_unauthorized_client">ошибка авторизации</string>
+	<string name="error_rest_client_status">ошибка данных клиента</string>
+	<string name="error_rest_client">ошибка передачи</string>
 
     <string name="country">Страна</string>
     <string name="currency">Валюта</string>

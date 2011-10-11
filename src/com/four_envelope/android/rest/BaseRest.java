@@ -40,6 +40,10 @@ public class BaseRest {
 	void setUrlParam(String from, String to) {
 		url = url.replace("{" + from + "}", URLEncoder.encode(to) );
 	}
+
+	protected String clearHTML(String xml) {
+		return xml.replaceAll("\\<span.*?\\>", "").replaceAll("\\</span\\>", "");
+	}
 	
 	private HttpRequestBase addAppRequestHeaders(HttpRequestBase request) {
 		request.addHeader("4KApplication", Constants.REST_APP_NAME);
@@ -50,8 +54,7 @@ public class BaseRest {
 	}
 	
     protected String doGet() throws LocalizedException {
-    	Log.i(getClass().getSimpleName(), "doGet");
-    	Log.i(getClass().getSimpleName(), url);
+		Log.i(getClass().getSimpleName(), "get " + url);
     	
         HttpGet getRequest = new HttpGet(url);
         addAppRequestHeaders(getRequest);
@@ -83,9 +86,7 @@ public class BaseRest {
 	
 	
     protected String doPost(String content) throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "doPost");
-		Log.i(getClass().getSimpleName(), url);
-		Log.i(getClass().getSimpleName(), content);
+		Log.i(getClass().getSimpleName(), "post " + url);
 
 		HttpPost postRequest = new HttpPost(url);
 		addAppRequestHeaders(postRequest);

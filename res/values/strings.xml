@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">4konverta</string>
+    <string name="app_name">4 konverta</string>
 
-<string name="error_resource_access">error_resource_access</string>
-<string name="error_unauthorized_client">error_unauthorized_client</string>
-<string name="error_rest_client_status">error_rest_client_status</string>
-<string name="error_rest_client">error_rest_client</string>
-
+	<string name="error_resource_access">error_resource_access</string>
+	<string name="error_unauthorized_client">error_unauthorized_client</string>
+	<string name="error_rest_client_status">error_rest_client_status</string>
+	<string name="error_rest_client">error_rest_client</string>
 
     <string name="country">Country</string>
     <string name="currency">Currency</string>

@@ -1,7 +1,5 @@
 package com.four_envelope.android.store;
 
-import android.util.Log;
-
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Expression;
@@ -23,14 +21,10 @@ public class StoreDailyExpense extends BaseObjectStore {
 	}
 	
 	public DailyExpense getData() throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "getData nObjectFileName " + mObjectFileName);
-		
 		return (DailyExpense) processObject();
 	}
 
 	public DailyExpense setData(Expression expression) throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "setData nObjectFileName " + mObjectFileName);
-		
 		storeObject( mRestClient.update(expression) );
 		
 		return getData();

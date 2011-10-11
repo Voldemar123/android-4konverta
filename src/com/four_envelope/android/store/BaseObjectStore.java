@@ -34,14 +34,6 @@ public class BaseObjectStore {
 
 	
 	public Object processObject() throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "processObject");
-
-//		mStoredObject = storedObject;
-
-//		if (mStoredObject != null && !mNeedUpdate)
-//			return mStoredObject;
-
-//		if (mStoredObject == null)
 		if ( !mNeedUpdate )
 			restoreObject();
 		
@@ -58,13 +50,12 @@ public class BaseObjectStore {
 	 * Store object to the file system by serialize	
 	 * @param obj
 	 */
-		protected synchronized void storeObject(Object obj) {
-			Log.i(getClass().getSimpleName(), "storeObject");
-			
+		protected void storeObject(Object obj) {
 			checkExternalStorage();
 			checkObjectPath();
 
 		    File file = new File(mObjectFileName);
+			Log.i(getClass().getSimpleName(), "store " + file.getAbsolutePath());
 		    
 	        OutputStream os;
 	        ObjectOutputStream oos;
@@ -93,8 +84,6 @@ public class BaseObjectStore {
 	 * Check exist path to stored object	
 	 */
 		private void checkObjectPath() {
-			Log.i(getClass().getSimpleName(), "checkObjectPath " + mObjectPathName);
-			
 			File file = new File(mObjectPathName);
 			file.mkdirs();
 		}
@@ -103,12 +92,10 @@ public class BaseObjectStore {
 	 * Restore the object from file	
 	 */
 		private void restoreObject() {
-			Log.i(getClass().getSimpleName(), "restoreObject");
-			
 			checkExternalStorage();
 
 		    File file = new File(mObjectFileName);
-		    Log.i(getClass().getSimpleName(), "from "+file.getAbsolutePath());
+		    Log.i(getClass().getSimpleName(), "restore " + file.getAbsolutePath());
 		    
 		    if (!file.exists()) {
 		    	Log.i(getClass().getSimpleName(), "file not exists");

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.util.Log;
-
 import com.four_envelope.android.model.Account;
 import com.four_envelope.android.model.ActualExpense;
 import com.four_envelope.android.model.ActualGoalCredit;
@@ -115,22 +113,17 @@ public class BudgetWork {
 
 	/**
 	 * Reformat date
-	 * @param showDate
-	 * @return
-	 * @throws ParseException
 	 */
 	public static CharSequence formatDate(String showDate) {
 		try {
 			return dfTitle.format( dfDate.parse( showDate ) );
-			
 		} catch (ParseException e) {
-			e.printStackTrace();
 			return showDate;
 		}
 	}
 
 	public static String formatDate(Date date) {
-			return dfTitle.format(date);
+		return dfTitle.format(date);
 	}
 
 	

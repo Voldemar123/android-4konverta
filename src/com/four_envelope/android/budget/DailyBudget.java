@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import android.util.Log;
-
 import com.four_envelope.android.model.ActualExpense;
 import com.four_envelope.android.model.ActualGoalCredit;
 import com.four_envelope.android.model.ActualIncome;
 import com.four_envelope.android.model.DailyExpense;
-import com.four_envelope.android.model.Envelope;
 import com.four_envelope.android.model.Execution;
 import com.four_envelope.android.model.ExecutionActual;
 import com.four_envelope.android.model.Person;

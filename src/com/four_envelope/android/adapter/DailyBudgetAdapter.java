@@ -17,7 +17,6 @@ import com.four_envelope.android.operation.UpdateListener;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,9 +122,6 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 
 		final DailyBudget o = getItem(position);
 		if (o != null) {
-			Log.i(getClass().getSimpleName(), "+++");
-			Log.i(getClass().getSimpleName(), dates[position].toLocaleString());		
-			
 			holder.mProgressBar.setVisibility(View.GONE);
 			
 			holder.mExecutionLayoutEnvelopeSpentRemaining.setVisibility(View.VISIBLE);
@@ -176,8 +172,6 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 			
 		}
 		else {
-			Log.i(getClass().getSimpleName(), "---");
-			
 			new PrepareBudgetOperation(this).execute(position, view);
 
 			holder.mExecutionLayoutEnvelopeSpentRemaining.setVisibility(View.GONE);

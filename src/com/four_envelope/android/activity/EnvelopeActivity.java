@@ -18,7 +18,7 @@ import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Envelope;
 import com.four_envelope.android.model.Person;
 import com.four_envelope.android.operation.RequestExecutionOperation;
-import com.four_envelope.android.store.StoreExecution;
+import com.four_envelope.android.operation.UpdateExecutionOperation;
 
 /**
  * Show the day from weekly envelope with daily expenses  
@@ -30,6 +30,9 @@ public class EnvelopeActivity extends BaseActivity {
 	private ViewFlow mViewFlow;
 	public DailyBudgetAdapter adapter;
 	public int viewFlowPosition;
+	
+	private UpdateExecutionOperation mUpdateExecutionOperation;
+	
 	
     public void onCreate(Bundle savedInstanceState) {
 		mContentView = R.layout.envelope_day_flow_view;
@@ -53,6 +56,7 @@ public class EnvelopeActivity extends BaseActivity {
 		    }
 		});
 		
+		mUpdateExecutionOperation = new UpdateExecutionOperation(this);
 	}
     
 	/* If your min SDK version is < 8 you need to trigger the onConfigurationChanged in ViewFlow manually, like this */	
@@ -121,27 +125,27 @@ public class EnvelopeActivity extends BaseActivity {
 
                 budget.processEnvelope();
                 
-                try {
-					new StoreExecution( envelope.getBegin() ).setData( budget.execution );
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+// save execution                
+                mUpdateExecutionOperation.execute( envelope.getBegin(), budget.execution );
                 
+// refresh view flow                
+                adapter.weekExecution.put( envelope.getBegin(), budget.execution );
                 adapter.putItem(position, budget);
                 
                 View view = mViewFlow.getSelectedView();
                 adapter.drawView(position, view);
                 view.invalidate();
-                
-            	Log.i(getClass().getSimpleName(), Float.toString(personDailyExpense.getSum()));
-            	
-//            	requestPageContent();
             }
         }
 	
 		super.onActivityResult(requestCode, resultCode, data);
 	}
     
+	public void onUpdate() {
+		if ( mUpdateExecutionOperation.isComplited() )
+			return;
+		
+		super.onUpdate();
+	}
+	
 }

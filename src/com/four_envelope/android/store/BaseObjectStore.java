@@ -50,7 +50,7 @@ public class BaseObjectStore {
 	 * Store object to the file system by serialize	
 	 * @param obj
 	 */
-		protected void storeObject(Object obj) {
+		protected synchronized void storeObject(Object obj) {
 			checkExternalStorage();
 			checkObjectPath();
 
@@ -91,7 +91,7 @@ public class BaseObjectStore {
 	/**
 	 * Restore the object from file	
 	 */
-		private void restoreObject() {
+		private synchronized void restoreObject() {
 			checkExternalStorage();
 
 		    File file = new File(mObjectFileName);

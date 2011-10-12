@@ -20,13 +20,14 @@ public class StoreDailyExpense extends BaseObjectStore {
 		mObjectFileName = mObjectPathName + "/" + date;
 	}
 	
-	public DailyExpense getData() throws LocalizedException {
+	public DailyExpense getData(boolean update) throws LocalizedException {
+		mNeedUpdate = update;
 		return (DailyExpense) processObject();
 	}
 
 	public DailyExpense setData(Expression expression) throws LocalizedException {
 		storeObject( mRestClient.update(expression) );
 		
-		return getData();
+		return getData(false);
 	}
 }

@@ -82,7 +82,6 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 			Expression expression = personDailyExpressions.get(0);
 
 			editExpression = expression;
-			mEditorExpression.setText( expression.getValue() );
 		}
 		
         mAccounts.setAdapter( new AccountSpinnerAdapter( 
@@ -124,6 +123,10 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 		
 // current edit daily selected currency expression				
 		editExpression.setValue( mEditorExpression.getText().toString() );
+		
+		Account account = (Account) mAccounts.getSelectedItem();
+		editExpression.setAccount( account.getId() );
+		editExpression.setCurrency( account.getCurrency().getId() );
 		
 		mUpdateDailyExpense.execute( mPersonId, mDate );
 	}

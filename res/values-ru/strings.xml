@@ -7,17 +7,28 @@
 	<string name="error_rest_client_status">ошибка данных клиента</string>
 	<string name="error_rest_client">ошибка передачи</string>
 
+	<string name="status_activity_title">Статус аккаунта</string>
     <string name="country">Страна</string>
     <string name="currency">Валюта</string>
     <string name="timeZone">Временная зона</string>
     <string name="persons">Люди</string>
     <string name="accounts">Счета</string>
     
-    
+	<string name="accounts_no_items">Счета отсутствуют</string>
+
     <string name="daily_execution">Ежедневные траты</string>
     <string name="date_execution_empty">Нет запланированных действий</string>
     <string name="total_left">Осталось потратить</string>
     
+	<string name="auth_activity_title">Войти в систему</string>
+    <string name="ui_activity_authenticating">Проверка\u2026</string>    
+    
+    <string name="login_activity_username_label">Пользователь</string>
+    <string name="login_activity_password_label">Логин</string>
+    <string name="login_activity_ok_button">Вход</string>
+    
+    <string name="login_fail_text_password_only">Вы ввели неправильный пароль или Ваш аккаунт недоступен.
+         Пожалуйста, проверьте введенные данные и попробуйте еще раз.</string>
     
     <string name="execution_actual_income">Получить</string>
     <string name="execution_actual_expense">Потратить</string>
@@ -33,6 +44,7 @@
     <string name="planned_date_from">от</string>
     
     
+    <string name="popup_editor_title">Дневной расход</string>
     <string name="execution_popup_editor_ok_button">Сохранить</string>
     <string name="execution_popup_editor_cancel_button">Отмена</string>
     <string name="account_label">Со счета</string>

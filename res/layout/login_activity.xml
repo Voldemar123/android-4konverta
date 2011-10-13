@@ -24,7 +24,6 @@
 				android:singleLine="true" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:minWidth="250dip"
 				android:scrollHorizontally="true" android:capitalize="none"
-				android:text="test_android"
 				android:autoText="false" android:inputType="textEmailAddress" />
 				
 			<TextView android:textAppearance="?android:attr/textAppearanceSmall"
@@ -36,7 +35,6 @@
 				android:singleLine="true" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:minWidth="250dip"
 				android:scrollHorizontally="true" android:capitalize="none"
-				android:text="test_android"
 				android:autoText="false" android:password="true" android:inputType="textPassword" />
 				
 			<TextView android:id="@+id/message_bottom"

@@ -6,7 +6,6 @@ import org.taptwo.android.widget.ViewFlow.ViewSwitchListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -98,10 +97,6 @@ public class EnvelopeActivity extends BaseActivity {
     }
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.i(getClass().getSimpleName(), "onActivityResult");
-		Log.i(getClass().getSimpleName(), Integer.toString(requestCode));
-		Log.i(getClass().getSimpleName(), Integer.toString(resultCode));
-
 // store updated person daily execution		
 		if ( requestCode == Invoke.Extras.EXECUTION_POPUP_EDITOR ) {
             if (resultCode == RESULT_OK) {

@@ -154,6 +154,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 
 					Invoke.User.executionPopupEditor(
 							activity,
+							activity.refreshContent, 
 							holder.mPersonId, 
 							holder.mPersonName, 
 							holder.mDate);

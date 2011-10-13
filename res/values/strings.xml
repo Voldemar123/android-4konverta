@@ -6,7 +6,10 @@
 	<string name="error_unauthorized_client">error_unauthorized_client</string>
 	<string name="error_rest_client_status">error_rest_client_status</string>
 	<string name="error_rest_client">error_rest_client</string>
-
+	<string name="error_external_storage">error_external_storage</string>
+	<string name="error_write_storage">error_write_storage</string>
+	<string name="error_read_storage">error_read_storage</string>
+	
 	<string name="status_activity_title">Account status</string>
     <string name="country">Country</string>
     <string name="currency">Currency</string>

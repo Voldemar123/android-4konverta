@@ -6,6 +6,9 @@
 	<string name="error_unauthorized_client">ошибка авторизации</string>
 	<string name="error_rest_client_status">ошибка данных клиента</string>
 	<string name="error_rest_client">ошибка передачи</string>
+	<string name="error_external_storage">ошибка доступа к SD карте</string>
+	<string name="error_write_storage">ошибка чтения с внешнего накопителя</string>
+	<string name="error_read_storage">ошибка записи на внешний накопитель</string>
 
 	<string name="status_activity_title">Статус аккаунта</string>
     <string name="country">Страна</string>

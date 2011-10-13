@@ -2,15 +2,13 @@ package com.four_envelope.android.store;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.StreamCorruptedException;
 
+import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.BaseObjectRest;
 
@@ -48,9 +46,8 @@ public class BaseObjectStore {
 	
 	/**
 	 * Store object to the file system by serialize	
-	 * @param obj
 	 */
-		protected synchronized void storeObject(Object obj) {
+		protected void storeObject(Object obj) throws LocalizedException {
 			checkExternalStorage();
 			checkObjectPath();
 
@@ -71,12 +68,9 @@ public class BaseObjectStore {
 		        
 		        mStoredObject = obj;
 		        
-			} catch (FileNotFoundException e) {
-				Log.e( getClass().getSimpleName(), "FileNotFound " + file, e );
-				e.printStackTrace();
-			} catch (IOException e) {
-				Log.e( getClass().getSimpleName(), "Error writing " + file, e );
-				e.printStackTrace();
+			} catch (Exception e) {
+				Log.e( getClass().getSimpleName(), file.toString(), e );
+				throw new LocalizedException( R.string.error_write_storage );
 			}
 		}
 
@@ -91,7 +85,7 @@ public class BaseObjectStore {
 	/**
 	 * Restore the object from file	
 	 */
-		private synchronized void restoreObject() {
+		private void restoreObject() throws LocalizedException {
 			checkExternalStorage();
 
 		    File file = new File(mObjectFileName);
@@ -116,19 +110,14 @@ public class BaseObjectStore {
 				ois.close();
 				is.close();
 				
-			} catch (FileNotFoundException e) {
-				Log.e( getClass().getSimpleName(), "FileNotFound " + file, e );
-			} catch (StreamCorruptedException e) {
-				Log.e( getClass().getSimpleName(), "StreamCorrupted " + file, e );
-			} catch (IOException e) {
-				Log.e( getClass().getSimpleName(), "Error reading " + file, e );
-			} catch (ClassNotFoundException e) {
-				Log.e( getClass().getSimpleName(), "ClassNotFound " + file, e );
+			} catch (Exception e) {
+				Log.e( getClass().getSimpleName(), file.toString(), e );
+				throw new LocalizedException( R.string.error_read_storage );
 			}
 			
 		}
 	
-	protected void checkExternalStorage() {
+	protected void checkExternalStorage() throws LocalizedException {
 		String state = Environment.getExternalStorageState();
 
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -144,14 +133,12 @@ public class BaseObjectStore {
 		    mExternalStorageAvailable = mExternalStorageWriteable = false;
 		}
 
-		// TODO throw error
-		
+		if ( !mExternalStorageAvailable || !mExternalStorageWriteable )
+			throw new LocalizedException( R.string.error_external_storage );
 	}
 
 	public void refresh() {
 		this.mNeedUpdate = true;
 	}
-
-	
 	
 }

@@ -12,7 +12,7 @@ import com.four_envelope.android.rest.RestExecution;
  */
 public class StoreExecution extends BaseObjectStore {
 
-	public StoreExecution(String envelopeBegin) {
+	public StoreExecution(String envelopeBegin) throws LocalizedException {
 		mRestClient = new RestExecution(envelopeBegin);
 
 		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin() + "/execution";

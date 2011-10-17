@@ -12,7 +12,7 @@ import com.four_envelope.android.store.StoreClient;
  */
 public class RestUser extends BaseObjectRest {
 
-	public RestUser() {
+	public RestUser() throws LocalizedException {
 		url = "/data/{user}";
 	}
 

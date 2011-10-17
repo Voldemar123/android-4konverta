@@ -13,7 +13,7 @@ import com.four_envelope.android.rest.RestDailyExpense;
  */
 public class StoreDailyExpense extends BaseObjectStore {
 
-	public StoreDailyExpense(String personId, String date) {
+	public StoreDailyExpense(String personId, String date) throws LocalizedException {
 		mRestClient = new RestDailyExpense(personId, date);
 
 		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin() + "/dailyExpense/" + personId;

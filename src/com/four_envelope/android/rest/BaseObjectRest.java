@@ -20,7 +20,7 @@ public abstract class BaseObjectRest extends BaseRest {
 
 	Serializer serializer;
 
-	public BaseObjectRest() {
+	public BaseObjectRest() throws LocalizedException {
 		super();		
 		
 		serializer = new Persister();

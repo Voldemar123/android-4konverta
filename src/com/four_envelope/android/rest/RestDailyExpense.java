@@ -16,7 +16,7 @@ public class RestDailyExpense extends BaseObjectRest {
 	private String mPersonId;
 	private String mDate;
 	
-	public RestDailyExpense(String personId, String date) {
+	public RestDailyExpense(String personId, String date) throws LocalizedException {
 		mPersonId = personId;
 		mDate = date;
 		

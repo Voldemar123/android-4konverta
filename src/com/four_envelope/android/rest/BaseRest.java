@@ -1,6 +1,10 @@
 package com.four_envelope.android.rest;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 
 import org.apache.http.HttpEntity;
@@ -31,8 +35,12 @@ public class BaseRest {
 	private DefaultHttpClient client;
 	 
 	String url;
+	private final String host = "http://" + Constants.REST_TARGET_DOMAIN;
 	
-	public BaseRest() {
+	public BaseRest() throws LocalizedException {
+		if ( !StoreClient.isLogged() )
+			throw new LocalizedException(R.string.error_unauthorized_client);
+		
 		targetHost = new HttpHost( Constants.REST_TARGET_DOMAIN, 80, "http" );
 		client = new DefaultHttpClient();
 	}
@@ -48,10 +56,58 @@ public class BaseRest {
 	private HttpRequestBase addAppRequestHeaders(HttpRequestBase request) {
 		request.addHeader("4KApplication", Constants.REST_APP_NAME);
 		request.addHeader("4KVersion", Constants.REST_API_VERSION);
-		request.addHeader("4KAuth", StoreClient.getLogin());
+		request.addHeader("4KAuth", StoreClient.getPassword());
 		
 		return request;
 	}
+	
+	private HttpURLConnection addAppRequestHeaders(HttpURLConnection conn) {
+		conn.setRequestProperty("4KApplication", Constants.REST_APP_NAME);
+		conn.setRequestProperty("4KVersion", Constants.REST_API_VERSION);
+		conn.setRequestProperty("4KAuth", StoreClient.getPassword());
+		
+		return conn;
+	}
+	
+    protected String doGet2() throws LocalizedException {
+		Log.i(getClass().getSimpleName(), "get " + url);
+    	
+		HttpURLConnection conn = null;
+        try {
+			URL restUrl = new URL( host + url );
+			conn = (HttpURLConnection) restUrl.openConnection();
+			
+			addAppRequestHeaders(conn);
+			conn.setRequestMethod("GET");
+
+			if ( conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED)
+				throw new LocalizedException(R.string.error_unauthorized_client);
+			
+			if ( conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+				throw new LocalizedException(R.string.error_rest_client_status);
+			
+			BufferedReader rd = new BufferedReader(
+					new InputStreamReader( conn.getInputStream() ) );
+
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ( ( line = rd.readLine() ) != null )
+				sb.append(line);
+
+			rd.close();
+
+			return sb.toString();				  
+
+        }
+        catch (IOException e) {
+        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
+        }
+        finally {
+        	if ( conn != null )
+        		conn.disconnect();
+        }
+    }	
 	
     protected String doGet() throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "get " + url);
@@ -60,8 +116,7 @@ public class BaseRest {
         addAppRequestHeaders(getRequest);
  
         try {
- 
-            HttpResponse getResponse = client.execute(targetHost, getRequest);
+             HttpResponse getResponse = client.execute(targetHost, getRequest);
             
             final int statusCode = getResponse.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_UNAUTHORIZED)

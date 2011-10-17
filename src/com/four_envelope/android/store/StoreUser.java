@@ -12,7 +12,7 @@ import com.four_envelope.android.rest.RestUser;
  */
 public class StoreUser extends BaseObjectStore {
 
-	public StoreUser() {
+	public StoreUser() throws LocalizedException {
 		mRestClient = new RestUser();
 		
 		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin();

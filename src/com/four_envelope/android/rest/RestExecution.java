@@ -14,7 +14,7 @@ public class RestExecution extends BaseObjectRest {
 
 	private String mEnvelopeBegin;
 	
-	public RestExecution(String envelopeBegin) {
+	public RestExecution(String envelopeBegin) throws LocalizedException {
 		mEnvelopeBegin = envelopeBegin;
 		
 		url = "/data/{user}/execution/{envelopeBegin}";

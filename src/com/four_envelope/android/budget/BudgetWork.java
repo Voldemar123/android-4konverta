@@ -145,12 +145,14 @@ public class BudgetWork {
 	public static CharSequence getPersonDailyExpenseSum(DailyExpense expense) {
 		if (expense == null)
 			return "";
+		if ( expense.getExpressions() == null )
+			return "";
 		
 		Float sum = expense.getSum();
-		if (sum == null || sum.equals( new Float(0f) ))
-			return "";
-		else
+		if (sum != null && expense.getExpressions().size() > 0 )
 			return formatMoney( sum, userData.getCurrency().getValue() );
+		else
+			return "";
 	}
 
 	/**
@@ -161,8 +163,8 @@ public class BudgetWork {
 		if (expense == null)
 			return true;
 		
-		Float sum = expense.getSum();
-		if (sum > 0)
+		if ( expense.getSum() > 0 || 
+				( expense.getExpressions() != null && expense.getExpressions().size() > 0 ) )
 			return false;
 		
 		Date today = new Date();
@@ -180,7 +182,7 @@ public class BudgetWork {
 				executionDate.getDate() == today.getDate() )	)
 			executionBeforeToday = executionDate.before(today);
 		
-		return sum.equals( new Float(0f) ) && executionBeforeToday;
+		return executionBeforeToday;
 	}
 
 // user accounts information

@@ -33,6 +33,6 @@
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen2.png "редактирование ежедневных трат")
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen3.png "статус аккаунта")
 
-## Скачать последнюю стабильную версию (apk QR Code)
+## Скачать последнюю стабильную сборку (apk QR code)
 
-(http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=MECARD%3AN%3Ahttp%3A%2F%2Fwww.4shared.com%2Fandroid%2FmxpCAloQ%2Fandroid-4konverta.html%3B%3B)
+![android client 4konverta apk](http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=MECARD%3AN%3Ahttp%3A%2F%2Fwww.4shared.com%2Fandroid%2FmxpCAloQ%2Fandroid-4konverta.html%3B%3B "apk")

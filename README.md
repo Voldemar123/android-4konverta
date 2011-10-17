@@ -7,13 +7,13 @@
 ## Возможности клиента
 
 * просмотр дневного бюджета и данных недельного конверта
-* перелистывание дней вперед и назад  
+* перелистывание жестами дней вперед и назад  
 * внесение ежедневных трат для членов семьи
 * просмотр запланированных трат и доходов
 * страница статуса аккаунта - списки членов семьи и счетов
 * возможна работа с несколькими аккаунтами
 * кеширование данных на телефоне для уменьшения траффика
-* Full-offline версия с синхронизацией (в разработке)
+* full-offline версия с синхронизацией (в разработке)
 * задавать фотографии из контактов для членов семьи (в разработке)
 * редактирование запланированных трат, доходов и целей (в разработке)
 
@@ -32,3 +32,7 @@
 ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen.png "перелистываем дневной бюджет") 
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen2.png "редактирование ежедневных трат")
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen3.png "статус аккаунта")
+
+## Скачать последнюю стабильную версию (apk QR Code)
+
+(http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=MECARD%3AN%3Ahttp%3A%2F%2Fwww.4shared.com%2Fandroid%2FmxpCAloQ%2Fandroid-4konverta.html%3B%3B)

@@ -46,8 +46,8 @@ public class AuthenticatorActivity extends Activity implements UpdateListener {
         mUsernameEdit = (EditText) findViewById(R.id.username_edit);
         mPasswordEdit = (EditText) findViewById(R.id.password_edit);
 
-//        mUsernameEdit.setText(mUsername);
-//        mPasswordEdit.setText(StoreClient.getPassword());
+        mUsernameEdit.setText(mUsername);
+        mPasswordEdit.setText(StoreClient.getPassword());
 
         mMessage = (TextView) findViewById(R.id.message);
         mMessage.setText(getMessage());
@@ -138,8 +138,10 @@ public class AuthenticatorActivity extends Activity implements UpdateListener {
 		else
 			hideProgress();
 
-		if (!mAuthorizeOperation.isComplited() && !mAuthorizeOperation.isSuccessLogin)
+		if (!mAuthorizeOperation.isComplited() && !mAuthorizeOperation.isSuccessLogin) {
 			mMessage.setText( getText(R.string.login_fail_text_password_only) );
+			StoreClient.logout();			
+		}
 		
 		// Called when the authentication process completes.
 		if (mAuthorizeOperation.isComplited() && mAuthorizeOperation.isSuccessLogin)

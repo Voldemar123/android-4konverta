@@ -17,7 +17,6 @@ import android.view.Window;
 
 public abstract class BaseActivity extends Activity implements UpdateListener {
 
-//	protected AsyncTask<Object, Object, Object> mGetContent;
 	protected int mContentView; 
 	
 	protected int mMenuRes = R.menu.base_menu;

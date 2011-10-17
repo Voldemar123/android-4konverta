@@ -1,7 +1,6 @@
 package com.four_envelope.android.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -45,8 +44,6 @@ public class StatusActivity extends BaseActivity {
 
     protected void requestPageContent() {
     	super.requestPageContent();
-    	
-    	Log.i(getClass().getSimpleName(), "--- refreshContent " + Boolean.toString(refreshContent));
     	
     	new RequestStatusOperation(this).execute();
 	}

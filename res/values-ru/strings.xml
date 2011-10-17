@@ -5,7 +5,7 @@
 	<string name="error_resource_access">ошибка разбора данных</string>
 	<string name="error_unauthorized_client">ошибка авторизации</string>
 	<string name="error_rest_client_status">ошибка данных клиента</string>
-	<string name="error_rest_client">ошибка передачи</string>
+	<string name="error_rest_client">ошибка передачи данных</string>
 	<string name="error_external_storage">ошибка доступа к SD карте</string>
 	<string name="error_write_storage">ошибка чтения с внешнего накопителя</string>
 	<string name="error_read_storage">ошибка записи на внешний накопитель</string>
@@ -31,7 +31,10 @@
     <string name="login_activity_ok_button">Вход</string>
     
     <string name="login_fail_text_password_only">Вы ввели неправильный пароль или Ваш аккаунт недоступен.
-         Пожалуйста, проверьте введенные данные и попробуйте еще раз.</string>
+         Проверьте введенные данные и попробуйте еще раз.</string>
+    
+    <string name="login_fail_text_password_missing">Введите пароль для доступа к Вашему аккаунту.</string>
+    <string name="new_account_text">Войти в свой аккаунт сервиса \"4 конверта\".</string>
     
     <string name="execution_actual_income">Получить</string>
     <string name="execution_actual_expense">Потратить</string>
@@ -45,7 +48,6 @@
 	<string name="envelope_remaining_overdraft">перерасход</string>
     
     <string name="planned_date_from">от</string>
-    
     
     <string name="popup_editor_title">Дневной расход</string>
     <string name="execution_popup_editor_ok_button">Сохранить</string>

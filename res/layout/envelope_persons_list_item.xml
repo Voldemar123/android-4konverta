@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="?android:attr/listPreferredItemHeight"
-	android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical" >
 
-	<ImageView android:id="@+id/icon" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:src="@drawable/icon" />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/icon" />
 
-	<TextView android:id="@+id/envelope_person_name"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/envelope_person_name"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:singleLine="true"
+        android:gravity="center_horizontal" />
 
-	<TextView android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:id="@+id/envelope_person_sum"
-		android:singleLine="true" android:textStyle="bold" android:gravity="center_horizontal"
-		android:ellipsize="marquee" />
+    <TextView
+        android:id="@+id/envelope_person_sum"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal"
+        android:singleLine="true" />
 
 </LinearLayout>

@@ -87,6 +87,7 @@ public class AccountSpinnerAdapter extends BaseAdapter implements SpinnerAdapter
 			str.append(" ]");
 
 			holder.text.setText( str.toString() );
+			
 			holder.mAccountId = o.getId();
 			
 // check person have daily expression for this account			

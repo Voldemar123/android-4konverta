@@ -134,12 +134,14 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 // remaining from envelope
 			holder.mEnvelopeRemaining.setText( o.getEnvelopeRemainingText() );
 			
-			if ( o.execution.getEnvelope().getSize() < o.getEnvelopeRemaining()  ) {
+			if ( o.getEnvelopeRemaining() < 0 ) {
 				holder.mEnvelopeRemaining.setTextColor(Color.RED);
 				holder.mEnvelopeRemainingMessage.setText( activity.getText(R.string.envelope_remaining_overdraft) );
 			}
-			else 
+			else {
+				holder.mEnvelopeRemainingMessage.setText( activity.getText(R.string.envelope_remaining_left) );
 				holder.mEnvelopeRemaining.setTextColor(Color.GREEN);
+			}
 			
 			holder.mPersons.setAdapter(
 	        		new ExecutionPersonAdapter( activity, o ) ); 

@@ -122,7 +122,6 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 					holder.mActual.setVisibility(View.GONE);
 
 				
-				holder.mPlanned.setTypeface(Typeface.DEFAULT);
 				holder.mPlanned.setPaintFlags( holder.mPlanned.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG );
 
 				holder.mDescription.setTextColor(Color.GRAY);
@@ -130,7 +129,6 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 			else {
 				holder.mActual.setVisibility(View.GONE);
 				
-				holder.mPlanned.setTypeface(Typeface.DEFAULT_BOLD);
 				holder.mPlanned.setPaintFlags( holder.mPlanned.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG );
 			}
 			
@@ -145,6 +143,7 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 			
 			
 			holder.mDescription.setText( holder.mDescriptionText );
+			holder.mDescription.setSelected(true);
 		}
 
 		return convertView;

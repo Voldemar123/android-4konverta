@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.four_envelope.android.R;
@@ -15,6 +16,7 @@ import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Person;
+import com.four_envelope.android.store.PersonImage;
 
 /**
  * Show person list with it daily expenses 
@@ -30,6 +32,8 @@ public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 	protected class ViewHolder {
 		TextView mName;
 		TextView mSum;
+		
+		ImageView mIcon;
 		
 		Integer mPersonId;
 		String mPersonName;
@@ -55,6 +59,7 @@ public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 
 			holder.mName = (TextView) convertView.findViewById(R.id.envelope_person_name);
 			holder.mSum = (TextView) convertView.findViewById(R.id.envelope_person_sum);
+			holder.mIcon = (ImageView) convertView.findViewById(R.id.icon);
 
 			convertView.setTag(holder);
 		} else {
@@ -74,6 +79,8 @@ public class ExecutionPersonAdapter extends ArrayAdapter<Person> {
 			
 			holder.mPersonId = o.getId();
 			holder.mPersonName = o.getName();
+			
+			PersonImage.load( holder.mIcon, holder.mPersonId );
 			
 			holder.mDate = mExecutionDate;
 		}

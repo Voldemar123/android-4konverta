@@ -1,6 +1,5 @@
 package com.four_envelope.android.store;
 
-import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.User;
 import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.RestUser;
@@ -15,7 +14,6 @@ public class StoreUser extends BaseObjectStore {
 	public StoreUser() throws LocalizedException {
 		mRestClient = new RestUser();
 		
-		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin();
 		mObjectFileName = mObjectPathName + "/user";
 	}
 	

@@ -1,6 +1,5 @@
 package com.four_envelope.android.store;
 
-import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.Execution;
 import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.RestExecution;
@@ -15,7 +14,7 @@ public class StoreExecution extends BaseObjectStore {
 	public StoreExecution(String envelopeBegin) throws LocalizedException {
 		mRestClient = new RestExecution(envelopeBegin);
 
-		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin() + "/execution";
+		mObjectPathName += "/execution";
 		mObjectFileName = mObjectPathName + "/" + envelopeBegin;
 	}
 	

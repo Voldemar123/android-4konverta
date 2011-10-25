@@ -1,6 +1,5 @@
 package com.four_envelope.android.store;
 
-import com.four_envelope.android.Constants;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Expression;
 import com.four_envelope.android.operation.LocalizedException;
@@ -16,7 +15,7 @@ public class StoreDailyExpense extends BaseObjectStore {
 	public StoreDailyExpense(String personId, String date) throws LocalizedException {
 		mRestClient = new RestDailyExpense(personId, date);
 
-		mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin() + "/dailyExpense/" + personId;
+		mObjectPathName += "/dailyExpense/" + personId;
 		mObjectFileName = mObjectPathName + "/" + date;
 	}
 	

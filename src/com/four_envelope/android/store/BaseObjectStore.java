@@ -12,7 +12,6 @@ import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.BaseObjectRest;
 
-import android.os.Environment;
 import android.util.Log;
 
 /**
@@ -20,17 +19,14 @@ import android.util.Log;
  * @author VMaximenko
  *
  */
-public class BaseObjectStore {
+public class BaseObjectStore extends BaseStore {
 
-	Boolean mNeedUpdate = false;
-	BaseObjectRest mRestClient;
+	protected Boolean mNeedUpdate = false;
+	protected BaseObjectRest mRestClient;
 
 	private Object mStoredObject;
-	String mObjectPathName, mObjectFileName;
+	protected String mObjectFileName;
 
-	private boolean mExternalStorageAvailable, mExternalStorageWriteable;
-
-	
 	public Object processObject() throws LocalizedException {
 		if ( !mNeedUpdate )
 			restoreObject();
@@ -74,14 +70,6 @@ public class BaseObjectStore {
 			}
 		}
 
-	/** 
-	 * Check exist path to stored object	
-	 */
-		private void checkObjectPath() {
-			File file = new File(mObjectPathName);
-			file.mkdirs();
-		}
-
 	/**
 	 * Restore the object from file	
 	 */
@@ -117,26 +105,6 @@ public class BaseObjectStore {
 			
 		}
 	
-	protected void checkExternalStorage() throws LocalizedException {
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-		    mExternalStorageAvailable = mExternalStorageWriteable = true;
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    // We can only read the media
-		    mExternalStorageAvailable = true;
-		    mExternalStorageWriteable = false;
-		} else {
-		    // Something else is wrong. It may be one of many other states, but all we need
-		    //  to know is we can neither read nor write
-		    mExternalStorageAvailable = mExternalStorageWriteable = false;
-		}
-
-		if ( !mExternalStorageAvailable || !mExternalStorageWriteable )
-			throw new LocalizedException( R.string.error_external_storage );
-	}
-
 	public void refresh() {
 		this.mNeedUpdate = true;
 	}

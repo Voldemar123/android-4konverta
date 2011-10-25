@@ -45,4 +45,13 @@ public class StoreClient {
 		return ( getLogin() != null && getPassword() != null);
 	}
 	
+	public static String getPersonImage(final Integer personId) {
+		return settings.getString("personImage_" + personId, null);
+	}
+
+	public static void setPersonImage(final Integer personId, final String personImage) {
+		editor.putString("personImage_" + personId, personImage);
+	    editor.commit();
+	}
+	
 }

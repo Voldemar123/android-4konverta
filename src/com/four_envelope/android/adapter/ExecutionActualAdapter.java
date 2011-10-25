@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +142,7 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 			
 			
 			holder.mDescription.setText( holder.mDescriptionText );
-			holder.mDescription.setSelected(true);
+//			holder.mDescription.setSelected(true);
 		}
 
 		return convertView;

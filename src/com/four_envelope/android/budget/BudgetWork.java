@@ -116,16 +116,20 @@ public class BudgetWork {
 	 */
 	public static CharSequence formatDate(String showDate) {
 		try {
-			return dfTitle.format( dfDate.parse( showDate ) );
+			return formatDate( dfDate.parse( showDate ) );
 		} catch (ParseException e) {
 			return showDate;
 		}
 	}
 
 	public static String formatDate(Date date) {
-		return dfTitle.format(date);
+		return dfDate.format(date);
 	}
 
+	public static String formatDateTitle(Date date) {
+		return dfTitle.format(date);
+	}
+	
 	
 	public static DailyExpense getPersonDailyExpense(Person person, String date) {
 		ArrayList<DailyExpense> expenses = person.getDailyExpenses();

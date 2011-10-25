@@ -2,17 +2,17 @@
 <resources>
     <string name="app_name">4 конверта</string>
 
-	<string name="error_resource_access">ошибка разбора данных</string>
-	<string name="error_unauthorized_client">ошибка авторизации</string>
-	<string name="error_rest_client_status">ошибка данных клиента</string>
-	<string name="error_rest_client">ошибка передачи данных</string>
-	<string name="error_external_storage">ошибка доступа к SD карте</string>
-	<string name="error_write_storage">ошибка чтения с внешнего накопителя</string>
-	<string name="error_read_storage">ошибка записи на внешний накопитель</string>
+	<string name="error_resource_access">Ошибка в формате данных</string>
+	<string name="error_unauthorized_client">Ошибка авторизации на сервисе</string>
+	<string name="error_rest_client_status">Ошибка доступа к сервису</string>
+	<string name="error_rest_client">Ошибка при передаче данных</string>
+	<string name="error_external_storage">Ошибка доступа к SD карте</string>
+	<string name="error_write_storage">Ошибка чтения с внешнего накопителя</string>
+	<string name="error_read_storage">Ошибка записи на внешний накопитель</string>
 
 	<string name="status_activity_title">Статус аккаунта</string>
     <string name="country">Страна</string>
-    <string name="currency">Валюта</string>
+    <string name="currency">Базовая валюта</string>
     <string name="timeZone">Временная зона</string>
     <string name="persons">Люди</string>
     <string name="accounts">Счета</string>
@@ -24,7 +24,7 @@
     <string name="total_left">Осталось потратить</string>
     
 	<string name="auth_activity_title">Войти в систему</string>
-    <string name="ui_activity_authenticating">Проверка\u2026</string>    
+    <string name="ui_activity_authenticating">Проверка введенных данных</string>    
     
     <string name="login_activity_username_label">Пользователь</string>
     <string name="login_activity_password_label">Логин</string>

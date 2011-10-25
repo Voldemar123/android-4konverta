@@ -21,7 +21,7 @@ public class RequesDailyExpenseOperation extends AbstractOperation<Object, Daily
 	DailyExpense process(Object... params) throws LocalizedException {
 		mPersonId = (Integer) params[0];
 		mDate = (String) params[1];
-
+		
 // get user properties
 		BudgetWork.userData = new StoreUser().getData(mActivity.refreshContent);
 			
@@ -36,7 +36,6 @@ public class RequesDailyExpenseOperation extends AbstractOperation<Object, Daily
 
 	@Override
 	void onClear() {
-//		mActivity.refreshContent = false;
 	}
 
 }

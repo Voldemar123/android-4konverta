@@ -43,7 +43,7 @@ public class BaseObjectStore extends BaseStore {
 	/**
 	 * Store object to the file system by serialize	
 	 */
-		protected void storeObject(Object obj) throws LocalizedException {
+		protected synchronized void storeObject(Object obj) throws LocalizedException {
 			checkExternalStorage();
 			checkObjectPath();
 
@@ -73,7 +73,7 @@ public class BaseObjectStore extends BaseStore {
 	/**
 	 * Restore the object from file	
 	 */
-		private void restoreObject() throws LocalizedException {
+		private synchronized void restoreObject() throws LocalizedException {
 			checkExternalStorage();
 
 		    File file = new File(mObjectFileName);

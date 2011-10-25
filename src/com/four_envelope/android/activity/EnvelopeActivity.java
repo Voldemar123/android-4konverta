@@ -30,6 +30,7 @@ public class EnvelopeActivity extends BaseActivity {
 	public DailyBudgetAdapter adapter;
 	public int viewFlowPosition;
 	
+	private RequestExecutionOperation mRequestExecutionOperation;
 	private UpdateExecutionOperation mUpdateExecutionOperation;
 	
 	
@@ -37,9 +38,12 @@ public class EnvelopeActivity extends BaseActivity {
 		mContentView = R.layout.envelope_day_flow_view;
 		mMenuRes = R.menu.envelope_menu;
 		mProgressRes = R.string.progress_envelope_msg;
-		
+
 		adapter = new DailyBudgetAdapter(this);
 
+		mRequestExecutionOperation = new RequestExecutionOperation(this);
+		mUpdateExecutionOperation = new UpdateExecutionOperation(this);
+		
 		setTitle( adapter.getTitle( adapter.getTodayId() ) );
 
 		super.onCreate(savedInstanceState);
@@ -54,8 +58,6 @@ public class EnvelopeActivity extends BaseActivity {
 		    	setTitle( adapter.getTitle(position) );
 		    }
 		});
-		
-		mUpdateExecutionOperation = new UpdateExecutionOperation(this);
 	}
     
 	/* If your min SDK version is < 8 you need to trigger the onConfigurationChanged in ViewFlow manually, like this */	
@@ -67,13 +69,13 @@ public class EnvelopeActivity extends BaseActivity {
     
     protected void requestPageContent() {
     	super.requestPageContent();
-    	
-    	new RequestExecutionOperation(this).execute();
+
+		adapter.clearDailyBudget();
+
+    	mRequestExecutionOperation.execute();
 	}
 	
 	void fillPageContent() {
-		adapter.clearDailyBudget();
-		mViewFlow.setAdapter(adapter, viewFlowPosition);
 	}
 	
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -137,6 +139,9 @@ public class EnvelopeActivity extends BaseActivity {
 	}
     
 	public void onUpdate() {
+		if ( mRequestExecutionOperation.isComplited() )
+			mViewFlow.setAdapter(adapter, viewFlowPosition);
+
 		if ( mUpdateExecutionOperation.isComplited() )
 			return;
 		

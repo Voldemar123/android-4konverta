@@ -34,7 +34,6 @@ public class PrepareBudgetOperation extends AbstractOperation<Object, DailyBudge
 		
 //check exist execution data
 		Execution executionData;
-//TODO for speed rewrite this code				
 		if ( mAdapter.weekExecution.containsKey(envelopeBegin) )
 			executionData = mAdapter.weekExecution.get(envelopeBegin);
 		else {

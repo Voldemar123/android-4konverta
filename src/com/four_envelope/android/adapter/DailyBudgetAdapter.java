@@ -191,7 +191,7 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	 */
 	@Override
 	public String getTitle(int position) {
-		return BudgetWork.formatDate( dates[position] );
+		return BudgetWork.formatDateTitle( dates[position] );
 	}
 
 	@Override

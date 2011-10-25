@@ -1,5 +1,7 @@
 package com.four_envelope.android.operation;
 
+import java.util.Date;
+
 import com.four_envelope.android.activity.EnvelopeActivity;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.model.Execution;
@@ -9,7 +11,6 @@ import com.four_envelope.android.store.StoreUser;
 public class RequestExecutionOperation extends AbstractOperation<String, Execution> {
 
 	private EnvelopeActivity mActivity;
-	private String mEnvelopeBegin;
 	
 	public RequestExecutionOperation(UpdateListener context) {
 		super(context);
@@ -21,21 +22,34 @@ public class RequestExecutionOperation extends AbstractOperation<String, Executi
 // get user properties
 		BudgetWork.userData = new StoreUser().getData(mActivity.refreshContent);
 	
-// look for envelope begin date    			
-		mEnvelopeBegin = BudgetWork.calcEnvelopeBegin( mActivity.adapter.dates[mActivity.viewFlowPosition] );
+// look for current envelope begin date    	
+		Date envelopeBegin = BudgetWork.envelopeBegin( 
+				mActivity.adapter.dates[mActivity.viewFlowPosition] ).getTime();
+
+// get current week execution
+		preloadExecution( 
+				BudgetWork.formatDate(envelopeBegin) );
 		
-// get current week execution 
-		return new StoreExecution(mEnvelopeBegin).getData(mActivity.refreshContent);
+// preload previous and next week execution		
+		preloadExecution(
+				BudgetWork.calcPreviousEnvelopeBegin( envelopeBegin ) );
+		preloadExecution(
+				BudgetWork.calcNextEnvelopeBegin( envelopeBegin ) );
+		
+		return null;
 	}
 
+	private void preloadExecution(final String envelopeBegin) throws LocalizedException {
+		mActivity.adapter.weekExecution.put( envelopeBegin, 
+				new StoreExecution(envelopeBegin).getData( mActivity.refreshContent ) );
+	}
+	
 	@Override
 	void onSuccess(Execution result) {
-		mActivity.adapter.weekExecution.put( mEnvelopeBegin, result );
 	}
 
 	@Override
 	void onClear() {
-//		mActivity.refreshContent = false;
 	}
-
+	
 }

@@ -131,6 +131,7 @@ public class BaseRest {
  
         }
         catch (IOException e) {
+        	Log.e( getClass().getSimpleName(), e.getMessage() );
         	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         finally {
@@ -142,6 +143,7 @@ public class BaseRest {
 	
     protected String doPost(String content) throws LocalizedException {
 		Log.i(getClass().getSimpleName(), "post " + url);
+		Log.i(getClass().getSimpleName(), "content " + content);
 
 		HttpPost postRequest = new HttpPost(url);
 		addAppRequestHeaders(postRequest);
@@ -163,6 +165,7 @@ public class BaseRest {
                 return EntityUtils.toString(postResponseEntity);			
 
 		} catch (IOException e) {
+			Log.e( getClass().getSimpleName(), e.getMessage() );
 			throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
 		}
 		finally {

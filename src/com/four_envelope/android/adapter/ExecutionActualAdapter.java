@@ -129,6 +129,8 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 				holder.mActual.setVisibility(View.GONE);
 				
 				holder.mPlanned.setPaintFlags( holder.mPlanned.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG );
+				
+				holder.mDescription.setTextColor(Color.WHITE);
 			}
 			
 			if ( DailyBudget.isPastPlannedDate(o) ) {
@@ -142,7 +144,7 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 			
 			
 			holder.mDescription.setText( holder.mDescriptionText );
-//			holder.mDescription.setSelected(true);
+			holder.mDescription.setSelected(true);
 		}
 
 		return convertView;

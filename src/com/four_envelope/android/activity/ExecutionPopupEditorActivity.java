@@ -34,12 +34,16 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 	public ArrayList<Expression> personDailyExpressions;
 	
 	private UpdateDailyExpenseOperation mUpdateDailyExpense;
+	private RequesDailyExpenseOperation mRequesDailyExpenseOperation;
 
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		mContentView = R.layout.execution_popup_editor;
 
+        mUpdateDailyExpense = new UpdateDailyExpenseOperation(this);
+        mRequesDailyExpenseOperation = new RequesDailyExpenseOperation(this);
+		
         Bundle extras = getIntent().getExtras();
         
         refreshContent = extras.getBoolean(Extras.EXECUTION_REFRESH);
@@ -52,14 +56,12 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
         mAccounts = (Spinner) findViewById(R.id.execution_popup_editor_account_spinner);
         mEditorExpression = (EditText) findViewById(R.id.execution_popup_editor_expression);
         mExpensePersonName = (TextView) findViewById(R.id.execution_person);
-        
-        mUpdateDailyExpense = new UpdateDailyExpenseOperation(this);
     }
     
     protected void requestPageContent() {
     	super.requestPageContent();
     	
-    	new RequesDailyExpenseOperation(this).execute( mPersonId, mDate );
+    	mRequesDailyExpenseOperation.execute( mPersonId, mDate );
 	}
     
 	void fillPageContent() {
@@ -88,10 +90,11 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 				this, 
 				BudgetWork.userData.getAccounts() ) ); 
 
-// select account with expression        
+// select account with expression  
+        Account spinnerAccount;
         for (int i = 0; i < mAccounts.getCount(); i++) {
-        	Account account = (Account) mAccounts.getItemAtPosition(i);
-            if ( account.getId().equals( editExpression.getAccount() )) {
+        	spinnerAccount = (Account) mAccounts.getItemAtPosition(i);
+            if ( spinnerAccount.getId().equals( editExpression.getAccount() )) {
             	mAccounts.setSelection(i);
             	break;
             }

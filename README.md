@@ -7,24 +7,21 @@
 ## Возможности клиента
 
 * просмотр дневного бюджета и данных недельного конверта
-* перелистывание жестами дней вперед и назад  
+* перелистывание дневной статистики жестами, вперед и назад  
 * внесение ежедневных трат для членов семьи
 * просмотр запланированных трат и доходов
 * страница статуса аккаунта - списки членов семьи и счетов
-* возможна работа с несколькими аккаунтами
+* установка фотографий для членов семьи (настраивается со страницы статуса)
+* возможна работа с несколькими аккаунтами сервиса "4 конверта"
 * кеширование данных на телефоне для уменьшения траффика
-* full-offline версия с синхронизацией (в разработке)
-* задавать фотографии из контактов для членов семьи (в разработке)
-* редактирование запланированных трат, доходов и целей (в разработке)
+* full-offline версия с синхронизацией данных (в разработке)
+* внесение и изменение запланированных трат, доходов и целей (в разработке)
 
 ## Полезные ссылки
 
 [Советы по использованию сервиса 4 конверта](http://www.4konverta.com/blog/)
-
 В проекте используется библиотека [android-viewflow](https://github.com/pakerfeldt/android-viewflow)
-
-Используется REST API сервис www.4konverta.com
-[Описание API сервиса](http://code.google.com/p/4k-api/wiki/ApiDescription)
+Используется REST API сервис 4 конверта [Описание API сервиса](http://code.google.com/p/4k-api/wiki/ApiDescription)
 
 ## Автор
 [Владимир Максименко](http://about.me/voldemar)
@@ -33,6 +30,5 @@
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen2.png "редактирование ежедневных трат")
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen3.png "статус аккаунта")
 
-## Скачать последнюю стабильную сборку (apk QR code)
-
-![android client 4konverta apk](http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=MECARD%3AN%3Ahttp%3A%2F%2Fwww.4shared.com%2Fandroid%2FmxpCAloQ%2Fandroid-4konverta.html%3B%3B "apk")
+## Скачать последнюю стабильную сборку от 27.10.2011 (apk QR code)
+![download apk](http://www.4shared.com/main/qrcode?file=QZzLxL2i "download apk")

@@ -65,6 +65,12 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
 	}
     
 	void fillPageContent() {
+// check have requested data 		
+		if ( personDailyExpense == null ) {
+			finish();
+			return;
+		}
+		
 		mExpensePersonName.setText(mPersonName);
 		
 // default account expression

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -40,7 +41,7 @@ public class BaseRest {
 	public BaseRest() throws LocalizedException {
 		if ( !StoreClient.isLogged() )
 			throw new LocalizedException(R.string.error_unauthorized_client);
-		
+
 		targetHost = new HttpHost( Constants.REST_TARGET_DOMAIN, 80, "http" );
 		client = new DefaultHttpClient();
 	}
@@ -116,7 +117,7 @@ public class BaseRest {
         addAppRequestHeaders(getRequest);
  
         try {
-             HttpResponse getResponse = client.execute(targetHost, getRequest);
+            HttpResponse getResponse = client.execute(targetHost, getRequest);
             
             final int statusCode = getResponse.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_UNAUTHORIZED)
@@ -129,6 +130,10 @@ public class BaseRest {
             if (getResponseEntity != null)
                 return EntityUtils.toString(getResponseEntity);
  
+        }
+        catch (UnknownHostException e) {
+        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         catch (IOException e) {
         	Log.e( getClass().getSimpleName(), e.getMessage() );
@@ -164,6 +169,9 @@ public class BaseRest {
             if (postResponseEntity != null)
                 return EntityUtils.toString(postResponseEntity);			
 
+        } catch (UnknownHostException e) {
+        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
 		} catch (IOException e) {
 			Log.e( getClass().getSimpleName(), e.getMessage() );
 			throw new LocalizedException( R.string.error_rest_client, e.getMessage() );

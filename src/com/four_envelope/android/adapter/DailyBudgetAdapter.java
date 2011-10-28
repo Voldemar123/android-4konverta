@@ -38,11 +38,11 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	private LayoutInflater mInflater;
 	public EnvelopeActivity activity;
 
-	private static final int daysDepth = 10;
-	private static final int daysSize = daysDepth * 2 + 1;
+	private static final int sDaysDepth = 10;
+	private static final int sDaysSize = sDaysDepth * 2 + 1;
 	
-	public Date[] dates = new Date[ daysSize ];
-	public DailyBudget[] budgets = new DailyBudget[ daysSize ];
+	public Date[] dates = new Date[sDaysSize];
+	public DailyBudget[] budgets = new DailyBudget[sDaysSize];
 	
 	public HashMap<String, Execution> weekExecution = new HashMap<String, Execution>();
 	
@@ -200,11 +200,11 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	}
 
 	public int getTodayId() {
-		return daysDepth;
+		return sDaysDepth;
 	}
 
 	public Date getTodayDate() {
-		return dates[daysDepth];
+		return dates[sDaysDepth];
 	}
 	
 	public void clearDailyBudget() {
@@ -226,13 +226,13 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 		calPast.setTime(today);
 		calFuture.setTime(today);
 
-		dates[ daysDepth ] = calPast.getTime();
-		for (int i = 1; i <= daysDepth; i++) {
+		dates[ sDaysDepth ] = calPast.getTime();
+		for (int i = 1; i <= sDaysDepth; i++) {
 			calPast.add( Calendar.DATE, -1 );
-			dates[ daysDepth - i ] = calPast.getTime();
+			dates[ sDaysDepth - i ] = calPast.getTime();
 
 			calFuture.add( Calendar.DATE, 1 );
-			dates[ daysDepth + i ] = calFuture.getTime();
+			dates[ sDaysDepth + i ] = calFuture.getTime();
 		}
 	}
 	

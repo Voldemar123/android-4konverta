@@ -52,7 +52,7 @@ public class PrepareBudgetOperation extends AbstractOperation<Object, DailyBudge
 	void onSuccess(DailyBudget result) {
 		mAdapter.budgets[mPosition] = result;
 		
-		mAdapter.drawView(mPosition, mView);
+		mAdapter.drawView( mPosition, mView );
 		mView.postInvalidate();
 	}
 

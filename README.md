@@ -30,5 +30,5 @@
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen2.png "редактирование ежедневных трат")
 &nbsp;&nbsp; ![android client 4konverta](https://github.com/Voldemar123/android-4konverta/raw/master/data/screen3.png "статус аккаунта")
 
-## Скачать последнюю стабильную сборку от 27.10.2011 (apk QR code)
-![download apk](http://www.4shared.com/main/qrcode?file=QZzLxL2i "download apk")
+## Скачать последнюю стабильную сборку от 28.10.2011 (apk QR code)
+![download apk](http://www.4shared.com/main/qrcode?file=nkn74AiH "download apk")

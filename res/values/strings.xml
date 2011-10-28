@@ -28,7 +28,7 @@
     <string name="ui_activity_authenticating">Authenticating\u2026</string>
 
     <!-- AuthenticatorActivity -->
-    <string name="login_activity_username_label">Username</string>
+    <string name="login_activity_username_label">Login</string>
     <string name="login_activity_password_label">Password</string>
     <!-- Button to sign in after entering username and password -->
     <string name="login_activity_ok_button">Sign in</string>

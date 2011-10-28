@@ -19,15 +19,15 @@
     
 	<string name="accounts_no_items">Счета отсутствуют</string>
 
-    <string name="daily_execution">Ежедневные траты</string>
+    <string name="daily_execution">Дневные траты</string>
     <string name="date_execution_empty">Нет запланированных действий</string>
     <string name="total_left">Осталось потратить</string>
     
 	<string name="auth_activity_title">Войти в систему</string>
     <string name="ui_activity_authenticating">Проверка введенных данных</string>    
     
-    <string name="login_activity_username_label">Пользователь</string>
-    <string name="login_activity_password_label">Логин</string>
+    <string name="login_activity_username_label">Логин</string>
+    <string name="login_activity_password_label">Пароль</string>
     <string name="login_activity_ok_button">Вход</string>
     
     <string name="login_fail_text_password_only">Вы ввели неправильный пароль или Ваш аккаунт недоступен.

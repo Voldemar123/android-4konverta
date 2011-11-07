@@ -12,6 +12,7 @@ import android.view.View;
 import com.four_envelope.android.R;
 import com.four_envelope.android.activity.Invoke.Extras;
 import com.four_envelope.android.adapter.DailyBudgetAdapter;
+import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
 import com.four_envelope.android.model.DailyExpense;
 import com.four_envelope.android.model.Envelope;
@@ -75,7 +76,7 @@ public class EnvelopeActivity extends BaseActivity {
     	mRequestExecutionOperation.execute();
 	}
 	
-	void fillPageContent() {
+    protected void fillPageContent() {
 	}
 	
     public boolean onOptionsItemSelected(MenuItem item) {

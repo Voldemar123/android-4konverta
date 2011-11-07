@@ -22,9 +22,8 @@ import org.apache.http.util.EntityUtils;
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
+import com.four_envelope.android.store.AppLogger;
 import com.four_envelope.android.store.StoreClient;
-
-import android.util.Log;
 
 /**
  * Base methods for REST access to 4konverta.com API
@@ -71,7 +70,7 @@ public class BaseRest {
 	}
 	
     protected String doGet2() throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "get " + url);
+    	AppLogger.info("get " + url);
     	
 		HttpURLConnection conn = null;
         try {
@@ -81,6 +80,7 @@ public class BaseRest {
 			addAppRequestHeaders(conn);
 			conn.setRequestMethod("GET");
 
+// TODO: log response code			
 			if ( conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED)
 				throw new LocalizedException(R.string.error_unauthorized_client);
 			
@@ -101,7 +101,7 @@ public class BaseRest {
 
         }
         catch (IOException e) {
-        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	AppLogger.error(e.getMessage(), e);
         	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         finally {
@@ -111,7 +111,7 @@ public class BaseRest {
     }	
 	
     protected String doGet() throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "get " + url);
+    	AppLogger.info("get " + url);
     	
         HttpGet getRequest = new HttpGet(url);
         addAppRequestHeaders(getRequest);
@@ -120,11 +120,17 @@ public class BaseRest {
             HttpResponse getResponse = client.execute(targetHost, getRequest);
             
             final int statusCode = getResponse.getStatusLine().getStatusCode();
-            if (statusCode == HttpStatus.SC_UNAUTHORIZED)
+            if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
+            	AppLogger.warn( StoreClient.getLogin() + 
+            			" > " + 
+            			getResponse.getStatusLine().getReasonPhrase() );
             	throw new LocalizedException( R.string.error_unauthorized_client );
+            }
             	
-            if (statusCode != HttpStatus.SC_OK)
+            if (statusCode != HttpStatus.SC_OK) {
+            	AppLogger.warn( getResponse.getStatusLine().getReasonPhrase() );
             	throw new LocalizedException( R.string.error_rest_client_status );
+            }
  
             HttpEntity getResponseEntity = getResponse.getEntity();
             if (getResponseEntity != null)
@@ -132,11 +138,11 @@ public class BaseRest {
  
         }
         catch (UnknownHostException e) {
-        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	AppLogger.error(e.getMessage(), e);
         	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         catch (IOException e) {
-        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	AppLogger.error(e.getMessage(), e);
         	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
         }
         finally {
@@ -147,8 +153,8 @@ public class BaseRest {
 	
 	
     protected String doPost(String content) throws LocalizedException {
-		Log.i(getClass().getSimpleName(), "post " + url);
-		Log.i(getClass().getSimpleName(), "content " + content);
+    	AppLogger.info("post " + url);
+    	AppLogger.info("content " + content);
 
 		HttpPost postRequest = new HttpPost(url);
 		addAppRequestHeaders(postRequest);
@@ -162,18 +168,27 @@ public class BaseRest {
 			HttpResponse postResponse = client.execute(targetHost, postRequest);
 
 			final int statusCode = postResponse.getStatusLine().getStatusCode();
-			if (statusCode != HttpStatus.SC_OK)
-				throw new LocalizedException( R.string.error_rest_client_status );
-
+            if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
+            	AppLogger.warn( StoreClient.getLogin() + 
+            			" > " + 
+            			postResponse.getStatusLine().getReasonPhrase() );
+            	throw new LocalizedException( R.string.error_unauthorized_client );
+            }
+            	
+            if (statusCode != HttpStatus.SC_OK) {
+            	AppLogger.warn( postResponse.getStatusLine().getReasonPhrase() );
+            	throw new LocalizedException( R.string.error_rest_client_status );
+            }
+			
 			HttpEntity postResponseEntity = postResponse.getEntity();
             if (postResponseEntity != null)
                 return EntityUtils.toString(postResponseEntity);			
 
         } catch (UnknownHostException e) {
-        	Log.e( getClass().getSimpleName(), e.getMessage() );
+        	AppLogger.error(e.getMessage(), e);
         	throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
 		} catch (IOException e) {
-			Log.e( getClass().getSimpleName(), e.getMessage() );
+			AppLogger.error(e.getMessage(), e);
 			throw new LocalizedException( R.string.error_rest_client, e.getMessage() );
 		}
 		finally {

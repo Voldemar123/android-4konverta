@@ -14,7 +14,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -85,7 +84,7 @@ public class PersonImage extends BaseStore {
 							Uri.parse( url ) ) );
 			
 		} catch (IOException e) {
-			Log.e( "PersonImage", e.getMessage() );
+			AppLogger.error(e.getMessage(), e);
 		}
 
 		return null;
@@ -106,9 +105,9 @@ public class PersonImage extends BaseStore {
 	        return f;
 	        
 		} catch (LocalizedException e) {
-			Log.e( "PersonImage", e.getMessage() );
+			AppLogger.error(e.getMessage(), e);
 		} catch (IOException e) {
-			Log.e( "PersonImage", e.getMessage() );
+			AppLogger.error(e.getMessage(), e);
 		}
 
         return null;

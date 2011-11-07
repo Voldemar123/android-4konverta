@@ -12,8 +12,6 @@ import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
 import com.four_envelope.android.rest.BaseObjectRest;
 
-import android.util.Log;
-
 /**
  * Base methods for store objects
  * @author VMaximenko
@@ -48,7 +46,7 @@ public class BaseObjectStore extends BaseStore {
 			checkObjectPath();
 
 		    File file = new File(mObjectFileName);
-			Log.i(getClass().getSimpleName(), "store " + file.getAbsolutePath());
+		    AppLogger.info("store " + file.getAbsolutePath());
 		    
 	        OutputStream os;
 	        ObjectOutputStream oos;
@@ -65,7 +63,7 @@ public class BaseObjectStore extends BaseStore {
 		        mStoredObject = obj;
 		        
 			} catch (Exception e) {
-				Log.e( getClass().getSimpleName(), file.toString(), e );
+				AppLogger.error(e.getMessage(), e);
 				throw new LocalizedException( R.string.error_write_storage );
 			}
 		}
@@ -77,10 +75,10 @@ public class BaseObjectStore extends BaseStore {
 			checkExternalStorage();
 
 		    File file = new File(mObjectFileName);
-		    Log.i(getClass().getSimpleName(), "restore " + file.getAbsolutePath());
+		    AppLogger.info("restore " + file.getAbsolutePath());
 		    
 		    if (!file.exists()) {
-		    	Log.i(getClass().getSimpleName(), "file not exists");
+		    	AppLogger.info("file not exists");
 		    	
 		    	mNeedUpdate = true;
 		    	return;
@@ -99,7 +97,7 @@ public class BaseObjectStore extends BaseStore {
 				is.close();
 				
 			} catch (Exception e) {
-				Log.e( getClass().getSimpleName(), file.toString(), e );
+				AppLogger.error(e.getMessage(), e);
 				throw new LocalizedException( R.string.error_read_storage );
 			}
 			

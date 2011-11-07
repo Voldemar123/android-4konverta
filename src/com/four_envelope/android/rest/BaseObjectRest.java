@@ -6,10 +6,9 @@ import java.io.StringReader;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import android.util.Log;
-
 import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
+import com.four_envelope.android.store.AppLogger;
 
 /**
  * Base methods for object REST access
@@ -18,7 +17,7 @@ import com.four_envelope.android.operation.LocalizedException;
  */
 public abstract class BaseObjectRest extends BaseRest {
 
-	Serializer serializer;
+	protected Serializer serializer;
 
 	public BaseObjectRest() throws LocalizedException {
 		super();		
@@ -35,7 +34,7 @@ public abstract class BaseObjectRest extends BaseRest {
 			return serializer.read( type, reader, false );
 
 		} catch (Exception e) {
-			Log.i(getClass().getSimpleName(), e.getMessage());
+			AppLogger.error(e.getMessage(), e);
 			throw new LocalizedException( R.string.error_resource_access, e.getMessage() );
 		}
 	}

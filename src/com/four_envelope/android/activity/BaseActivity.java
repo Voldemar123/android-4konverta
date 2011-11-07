@@ -2,6 +2,7 @@ package com.four_envelope.android.activity;
 
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.R;
+import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.operation.UpdateListener;
 import com.four_envelope.android.store.PersonImage;
 import com.four_envelope.android.store.StoreClient;
@@ -49,7 +50,7 @@ public abstract class BaseActivity extends Activity implements UpdateListener {
         	Invoke.User.authenticate(this);
 	}
 	
-	abstract void fillPageContent();
+	abstract protected void fillPageContent();
 	
     protected void requestPageContent() {
     	showProgress();

@@ -64,7 +64,7 @@ public class ExecutionPopupEditorActivity extends BaseActivity {
     	mRequesDailyExpenseOperation.execute( mPersonId, mDate );
 	}
     
-	void fillPageContent() {
+    protected void fillPageContent() {
 // check have requested data 		
 		if ( personDailyExpense == null ) {
 			finish();

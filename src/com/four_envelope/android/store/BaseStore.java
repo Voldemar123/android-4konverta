@@ -14,7 +14,6 @@ import com.four_envelope.android.operation.LocalizedException;
  *
  */
 public class BaseStore {
-
 	protected String mObjectPathName = Constants.APP_CACHE_PATH + StoreClient.getLogin();
 	
 	private boolean mExternalStorageAvailable, mExternalStorageWriteable;

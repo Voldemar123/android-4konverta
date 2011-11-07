@@ -55,7 +55,11 @@ public class StatusActivity extends BaseActivity {
     	new RequestStatusOperation(this).execute();
 	}
     
-	void fillPageContent() {
+	protected void fillPageContent() {
+// check have requested data
+		if (BudgetWork.userData == null)
+			return;
+
 		mAccountLogin.setText( StoreClient.getLogin() );
 		
         mCurrency.setText( BudgetWork.userData.getCurrency().getValue() );

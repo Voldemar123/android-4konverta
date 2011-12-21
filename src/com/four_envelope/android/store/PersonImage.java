@@ -6,11 +6,11 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.four_envelope.android.FourEnvelopeApplication;
 import com.four_envelope.android.R;
 import com.four_envelope.android.operation.LocalizedException;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -34,9 +34,11 @@ public class PersonImage extends BaseStore {
 	private static Map<Integer, SoftReference<Bitmap>> cache;
 	
 
-	public static void setResources(Context context) {
-		mContentResolver = context.getContentResolver();
-		placeholder = BitmapFactory.decodeResource( context.getResources(), R.drawable.icon );
+	public static void setResources() {
+		mContentResolver = FourEnvelopeApplication.getContext().getContentResolver();
+		placeholder = BitmapFactory.decodeResource( 
+				FourEnvelopeApplication.getContext().getResources(), 
+				R.drawable.icon );
 
 		cache = new HashMap<Integer, SoftReference<Bitmap>>();
 		store = new BaseStore();

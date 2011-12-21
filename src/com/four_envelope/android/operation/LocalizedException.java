@@ -1,6 +1,6 @@
 package com.four_envelope.android.operation;
 
-import android.content.Context;
+import com.four_envelope.android.FourEnvelopeApplication;
 
 /**
  * Исключение, генерируемое приложением, содержащие ресурс с описанием ошибки.
@@ -33,14 +33,12 @@ public class LocalizedException extends Exception {
 
 	/**
 	 * Возвращает текст ошибки.
-	 * 
-	 * @param context
 	 * @return
 	 */
-	public String getString(Context context) {
+	public String getString() {
 		if (extra == null)
-			return context.getString(resourceID);
+			return FourEnvelopeApplication.getContext().getString(resourceID);
 		else
-			return context.getString(resourceID, extra);
+			return FourEnvelopeApplication.getContext().getString(resourceID, extra);
 	}
 }

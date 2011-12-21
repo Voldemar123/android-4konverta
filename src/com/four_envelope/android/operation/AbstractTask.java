@@ -1,5 +1,7 @@
 package com.four_envelope.android.operation;
 
+import com.four_envelope.android.FourEnvelopeApplication;
+
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -43,8 +45,8 @@ public abstract class AbstractTask<Params, Result> extends
 		super.onPostExecute(result);
 
 		if (result.exception != null)
-			Toast.makeText( context.getUpdateContext(), 
-					result.exception.getString( context.getUpdateContext() ),
+			Toast.makeText( FourEnvelopeApplication.getContext(), 
+					result.exception.getString(),
 					Toast.LENGTH_LONG).show();
 		else
 			onSuccess(result.result);

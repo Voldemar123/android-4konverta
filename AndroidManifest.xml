@@ -5,7 +5,13 @@
       android:versionName="07.11.2011"
       android:installLocation="auto">
 
-    <application android:icon="@drawable/ic_launcher_money_envelope" 
+<uses-sdk android:minSdkVersion="10" />    
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application android:name=".FourEnvelopeApplication"
+        android:icon="@drawable/ic_launcher_money_envelope" 
     	android:label="@string/app_name" 
     	android:debuggable="true">
 
@@ -33,10 +39,5 @@
         </activity>
           
     </application>
-
-<uses-sdk android:minSdkVersion="10" />    
-
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

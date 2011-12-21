@@ -2,14 +2,12 @@ package com.four_envelope.android.activity;
 
 import com.four_envelope.android.Constants;
 import com.four_envelope.android.R;
-import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.operation.UpdateListener;
 import com.four_envelope.android.store.PersonImage;
 import com.four_envelope.android.store.StoreClient;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,7 +37,7 @@ public abstract class BaseActivity extends Activity implements UpdateListener {
 		StoreClient.setPreferences( getSharedPreferences( Constants.APP_PREFS_NAME, 0) );
 //		StoreClient.logout();
 		
-		PersonImage.setResources( this ); 
+		PersonImage.setResources(); 
 		
 		dialog = new ProgressDialog(this);
 		dialog.setMessage( getText( mProgressRes ) );
@@ -122,11 +120,6 @@ public abstract class BaseActivity extends Activity implements UpdateListener {
 		}
     }
 
-    @Override
-	public Context getUpdateContext() {
-		return getApplicationContext();
-	}
-    
 	@Override
 	public void onUpdate() {
 		fillPageContent();			

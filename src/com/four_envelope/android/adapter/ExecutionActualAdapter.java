@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.four_envelope.android.FourEnvelopeApplication;
 import com.four_envelope.android.R;
 import com.four_envelope.android.budget.BudgetWork;
 import com.four_envelope.android.budget.DailyBudget;
@@ -26,7 +27,6 @@ import com.four_envelope.android.model.ExecutionActual;
 public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 
 	private ArrayList<ExecutionActual> items;
-	private Context context;
 	private final static int viewResourceId = R.layout.execution_actual_item;
 	
 	private class ViewHolder {
@@ -65,7 +65,6 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 	public ExecutionActualAdapter(Context context, ArrayList<ExecutionActual> items) {
 		super(context, viewResourceId, items);
 
-		this.context = context;
 		this.items = items;
 	}
 
@@ -95,15 +94,15 @@ public class ExecutionActualAdapter extends ArrayAdapter<ExecutionActual> {
 		if (o != null) {
 			
 			if (o instanceof ActualIncome) {
-				holder.mActionText = this.context.getText(R.string.execution_actual_income);
+				holder.mActionText = FourEnvelopeApplication.getContext().getText(R.string.execution_actual_income);
 				holder.mDescriptionText = ((ActualIncome) o).getIncome().getName();
 			}
 			if (o instanceof ActualExpense) {
-				holder.mActionText = this.context.getText(R.string.execution_actual_expense);
+				holder.mActionText = FourEnvelopeApplication.getContext().getText(R.string.execution_actual_expense);
 				holder.mDescriptionText = ((ActualExpense) o).getExpense().getName();
 			}
 			if (o instanceof ActualGoalCredit) {
-				holder.mActionText = this.context.getText(R.string.execution_actual_goal_credit);
+				holder.mActionText = FourEnvelopeApplication.getContext().getText(R.string.execution_actual_goal_credit);
 				holder.mDescriptionText = ((ActualGoalCredit) o).getGoal().getName();
 			}
 

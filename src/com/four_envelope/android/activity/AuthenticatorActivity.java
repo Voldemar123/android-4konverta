@@ -8,7 +8,6 @@ import com.four_envelope.android.store.StoreClient;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -146,11 +145,6 @@ public class AuthenticatorActivity extends Activity implements UpdateListener {
 		// Called when the authentication process completes.
 		if (mAuthorizeOperation.isComplited() && mAuthorizeOperation.isSuccessLogin)
 			finishLogin();
-	}
-
-	@Override
-	public Context getUpdateContext() {
-		return getApplicationContext();
 	}
 
 }

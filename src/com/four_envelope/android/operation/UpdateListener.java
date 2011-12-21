@@ -1,7 +1,5 @@
 package com.four_envelope.android.operation;
 
-import android.content.Context;
-
 /**
  * Интерфейс для получения извещения об изменениях состояния.
  * 
@@ -14,6 +12,4 @@ public interface UpdateListener {
 	 * Должно вызываться в UI потоке после каждого изменения данных приложения.
 	 */
 	void onUpdate();
-	Context getUpdateContext();
-
 }

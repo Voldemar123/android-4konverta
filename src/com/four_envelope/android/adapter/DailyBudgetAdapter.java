@@ -240,9 +240,4 @@ public class DailyBudgetAdapter extends BaseAdapter implements TitleProvider, Up
 	public void onUpdate() {
 	}
 
-	@Override
-	public Context getUpdateContext() {
-		return activity.getApplicationContext();
-	}
-	
 }
